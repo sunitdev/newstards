@@ -1,0 +1,15 @@
+# OSX Files
+.DS_Store
+
+# Generated Files
+/build
+
+# IDE Files
+/.idea
+.gradle
+/local.properties
+*.iml
+
+
+/captures
+.externalNativeBuild
