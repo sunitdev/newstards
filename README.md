@@ -1,6 +1,10 @@
 # Module Folder Structure
 - repository
 - ui
+    - reddit
+        - fragments
+        - adapter
+    - components
     - viewmodel
     - activites
     - fragments
