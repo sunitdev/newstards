@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="darkIconBarBackground">#FFFFFF</color>
+    <!-- Dark Theme -->
+    <color name="darkActivityBackground">#575F63</color>
 
+    <color name="darkIconBarBackground">#FFFFFF</color>
+    <color name="darkIconBarIconBackground">#FFFFFF</color>
+    <color name="darkIconBarIconShadow">#E6E6E6</color>
+    <!-- /Dark Theme -->
 </resources>

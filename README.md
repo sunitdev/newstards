@@ -4,7 +4,7 @@
     - reddit
         - fragments
         - adapter
-    - components
+    - views
     - viewmodel
     - activites
     - fragments

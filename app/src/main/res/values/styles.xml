@@ -3,8 +3,11 @@
     <!-- Dark Application Theme. -->
     <style name="App.Theme.Dark" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="colorIconBarBackground">@color/darkIconBarBackground</item>
+        <item name="android:windowBackground">@color/darkActivityBackground</item>
 
+        <item name="colorIconBarBackground">@color/darkIconBarBackground</item>
+        <item name="colorIconBarIconBackground">@color/darkIconBarIconBackground</item>
+        <item name="colorIconBarIconShadow">@color/darkIconBarIconShadow</item>
     </style>
 
 </resources>

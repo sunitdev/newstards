@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Colors -->
+    <attr name="colorActivityBackground" format="reference"/>
+
     <attr name="colorIconBarBackground" format="reference"/>
+    <attr name="colorIconBarIconBackground" format="reference"/>
+    <attr name="colorIconBarIconShadow" format="reference"/>
+    <!-- /Colors -->
+
 </resources>
