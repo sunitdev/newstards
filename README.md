@@ -8,6 +8,7 @@
     - viewmodel
     - activites
     - fragments
+- models
 - services
     - Api
 - database
