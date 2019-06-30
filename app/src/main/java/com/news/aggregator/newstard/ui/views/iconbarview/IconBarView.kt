@@ -1,12 +1,9 @@
 package com.news.aggregator.newstard.ui.views.iconbarview
 
-import android.animation.AnimatorInflater
 import android.content.Context
-import android.media.Image
-import android.support.constraint.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import com.news.aggregator.newstard.R
 
