@@ -48,7 +48,7 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
         val imageButton = ImageButton(context)
 
         with(imageButton) {
-            id = id
+            id = service.id
             layoutParams = LinearLayout.LayoutParams(30f.toDP(), 30f.toDP())
             scaleType = ImageView.ScaleType.FIT_XY
             adjustViewBounds = true
