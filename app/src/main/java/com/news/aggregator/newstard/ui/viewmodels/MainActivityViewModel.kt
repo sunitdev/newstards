@@ -7,9 +7,9 @@ import com.news.aggregator.newstard.models.NewsService
 class MainActivityViewModel: ViewModel() {
 
     // Constant services list
-    private val _services = Array(1) {
+    private val _services = arrayOf(
         NewsService(1, "Reddit", R.drawable.reddit_icon)
-    }
+    )
 
     /**
      * Return currently active services
