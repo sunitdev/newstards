@@ -6,11 +6,15 @@ import com.news.aggregator.newstard.services.apis.reddit.RedditPost
 import com.news.aggregator.newstard.services.apis.reddit.RedditService
 
 
-class RedditRepository{
+interface RedditRepository{
 
-    private var _redditService: RedditService = RedditService()
+    fun getPosts(): Observable<List<RedditPost>>
+}
 
-    fun getPosts(): Observable<List<RedditPost>> {
+
+class RedditRepositoryImpl(private val _redditService: RedditService): RedditRepository{
+
+    override fun getPosts(): Observable<List<RedditPost>> {
         return _redditService.fetchPosts()
     }
 }
