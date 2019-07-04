@@ -2,7 +2,6 @@ package com.news.aggregator.newstard.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 
 
 import android.view.LayoutInflater
@@ -13,7 +12,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.news.aggregator.newstard.R
-import com.news.aggregator.newstard.services.reddit.RedditPost
+import com.news.aggregator.newstard.services.apis.reddit.RedditJsonResponseModel.RedditPost
 
 
 class RedditAdapter(val context: Context, private val news: List<RedditPost>) : RecyclerView.Adapter<RedditAdapter.MyViewHolder>() {
