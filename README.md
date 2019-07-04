@@ -1,9 +1,14 @@
 # Module Folder Structure
 - repository
 - ui
+    - reddit
+        - fragments
+        - adapter
+    - views
     - viewmodel
     - activites
     - fragments
+- models
 - services
     - Api
 - database
