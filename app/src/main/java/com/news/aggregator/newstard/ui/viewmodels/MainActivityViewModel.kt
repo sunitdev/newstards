@@ -3,8 +3,9 @@ package com.news.aggregator.newstard.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.models.NewsService
+import javax.inject.Inject
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel @Inject constructor() : ViewModel() {
 
     // Constant services list
     private val _services = arrayOf(
