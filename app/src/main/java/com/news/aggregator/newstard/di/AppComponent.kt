@@ -2,14 +2,14 @@ package com.news.aggregator.newstard.di
 
 import android.app.Application
 import com.news.aggregator.newstard.di.modules.ActivityModule
-import com.news.aggregator.newstard.di.modules.AppModule
+import com.news.aggregator.newstard.di.modules.ServicesModule
 import dagger.Component
 import com.news.aggregator.newstard.App
 import dagger.BindsInstance
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, ActivityModule::class])
+@Component(modules = [ServicesModule::class, ActivityModule::class])
 interface AppComponent{
 
     @Component.Builder

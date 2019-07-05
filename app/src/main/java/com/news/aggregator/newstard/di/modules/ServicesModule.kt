@@ -4,5 +4,5 @@ import com.news.aggregator.newstard.di.modules.services.RedditModule
 import dagger.Module
 
 @Module(includes = [RedditModule::class])
-class AppModule{
+class ServicesModule{
 }

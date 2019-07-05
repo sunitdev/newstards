@@ -2,7 +2,6 @@ package com.news.aggregator.newstard.repositories.reddit
 
 import io.reactivex.Observable
 
-import com.news.aggregator.newstard.services.apis.reddit.RedditPost
 import com.news.aggregator.newstard.services.apis.reddit.RedditService
 import javax.inject.Inject
 
