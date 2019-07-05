@@ -1,14 +1,19 @@
 package com.news.aggregator.newstard.ui.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.ActivityMainBinding
+import com.news.aggregator.newstard.repositories.reddit.RedditRepository
 import com.news.aggregator.newstard.ui.viewmodels.MainActivityViewModel
 
-class MainActivity : AppCompatActivity() {
+import javax.inject.Inject
+
+class MainActivity : BaseActivity() {
+
+    @Inject
+    lateinit var redditRepositiry: RedditRepository
 
     // View Model instance
     private lateinit var viewModel: MainActivityViewModel
