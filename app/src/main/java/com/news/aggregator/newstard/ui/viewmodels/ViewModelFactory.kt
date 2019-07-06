@@ -36,7 +36,7 @@ class ViewModelFactory @Inject
 
         // If provider is not found then raise exception
         if (provider == null) {
-            throw IllegalArgumentException("Invalid model class ${modelClass}")
+            throw IllegalArgumentException("Invalid model class ${modelClass}. Did you forgot to add ViewModel binding in ViewModelModule?")
         }
 
         //Try creating viewmodel instance from provider

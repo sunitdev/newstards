@@ -27,11 +27,30 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
         value?.let { renderServicesAsImageIcons(it) }
     }
 
+    // Property to set current selected icon
+    var selectedNewsService: NewsService? = null
+    set(value){
+        val container: LinearLayout = findViewById(R.id.viewIconBarImageIconLayout)
+
+        // If selected service exists and View with same id exists then scale down
+        selectedNewsService?.let{
+            container.findViewById<ImageButton>(it.id)?.let { imageButton -> scaleDownImageButton(imageButton)  }
+        }
+
+        // If value is not null and View with same id exists then scale up
+        value?.let {
+            container.findViewById<ImageButton>(it.id)?.let { imageButton -> scaleUpImageButton(imageButton)  }
+        }
+
+        field = value
+    }
+
     // Private variables
     private val _iconButtonWidth = 30f.toDP()
     private val _iconButtonHeight = 30f.toDP()
     private val _activeIconButtonWidth = 50f.toDP()
     private val _activeIconButtonHeight = 50f.toDP()
+
 
     /**
      * Add services as child view in linear layout
@@ -45,11 +64,12 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
      * Convert service instance to ImageButtonView instance
      */
     private fun getViewForService(service: NewsService): ImageButton {
+
         val imageButton = ImageButton(context)
 
         with(imageButton) {
             id = service.id
-            layoutParams = LinearLayout.LayoutParams(30f.toDP(), 30f.toDP())
+            layoutParams = LinearLayout.LayoutParams(_iconButtonWidth, _iconButtonHeight)
             scaleType = ImageView.ScaleType.FIT_XY
             adjustViewBounds = true
 
@@ -59,6 +79,13 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
             setOnClickListener {
                 handleImageButtonClicked(imageButton, service)
             }
+        }
+
+        // Check for selected service
+        if(service == selectedNewsService){
+            scaleUpImageButton(imageButton)
+        }else{
+            scaleDownImageButton(imageButton)
         }
 
         return imageButton
@@ -82,7 +109,7 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
     /**
      * Scale down animation fot Image Button
      */
-    private fun scaleUpDownButton(view: ImageButton){
+    private fun scaleDownImageButton(view: ImageButton){
         val layoutParams = view.layoutParams
         layoutParams.width = _iconButtonWidth
         layoutParams.height = _iconButtonHeight
