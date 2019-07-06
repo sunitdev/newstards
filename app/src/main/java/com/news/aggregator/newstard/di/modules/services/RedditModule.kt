@@ -1,10 +1,13 @@
 package com.news.aggregator.newstard.di.modules.services
 
+import android.app.Application
 import com.news.aggregator.newstard.repositories.reddit.RedditRepository
 import com.news.aggregator.newstard.repositories.reddit.RedditRepositoryImpl
 import com.news.aggregator.newstard.services.apis.reddit.RedditApi
 import com.news.aggregator.newstard.services.apis.reddit.RedditService
 import com.news.aggregator.newstard.services.apis.reddit.RedditServiceImpl
+import com.news.aggregator.newstard.ui.adapters.RedditRecyclerAdapter
+import com.news.aggregator.newstard.ui.pagination.reddit.RedditPostDataSourceFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -34,13 +37,17 @@ class RedditModule{
     
     @Provides
     @Singleton
-    fun provideReditService(redditApi: RedditApi): RedditService {
-        return RedditServiceImpl(redditApi)
-    }
+    fun provideReditService(redditApi: RedditApi): RedditService = RedditServiceImpl(redditApi)
 
     @Provides
     @Singleton
-    fun provideRedditRepository(redditService: RedditService): RedditRepository {
-        return RedditRepositoryImpl(redditService)
-    }
+    fun provideRedditRepository(redditService: RedditService): RedditRepository = RedditRepositoryImpl(redditService)
+
+    @Provides
+    @Singleton
+    fun provideRedditDataSourceFactory(redditRepository: RedditRepository): RedditPostDataSourceFactory
+            = RedditPostDataSourceFactory(redditRepository)
+
+    @Provides
+    fun providerRecycleViewAdapter(application: Application): RedditRecyclerAdapter = RedditRecyclerAdapter(application)
 }

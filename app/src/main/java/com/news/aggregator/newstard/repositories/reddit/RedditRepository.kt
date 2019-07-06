@@ -11,23 +11,17 @@ import javax.inject.Inject
 
 interface RedditRepository{
 
-    fun getPosts(): Observable<List<RedditPost>>
+    fun getPosts(limit: Int, afterId: String?): Observable<List<RedditPost>>
 }
 
 
-class RedditRepositoryImpl: RedditRepository{
-
-    private val _redditService: RedditService
-
-    @Inject
-    constructor(_redditService: RedditService){
-        this._redditService = _redditService
-    }
+class RedditRepositoryImpl
+    @Inject constructor(private val _redditService: RedditService):
+        RedditRepository{
 
     /**
      * Returns all reddit posts
      */
-    override fun getPosts(): Observable<List<RedditPost>> {
-        return _redditService.fetchPosts()
-    }
+    override fun getPosts(limit: Int, afterId: String?) = _redditService.fetchPosts(limit, afterId)
+
 }

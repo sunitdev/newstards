@@ -6,24 +6,19 @@ import javax.inject.Inject
 
 
 interface RedditService{
-    fun fetchPosts() : Observable<List<RedditPost>>
+    fun fetchPosts(limit: Int, afterID: String?) : Observable<List<RedditPost>>
 }
 
 
-class RedditServiceImpl: RedditService{
+class RedditServiceImpl
+    @Inject constructor(private val _redditApiService: RedditApi):
+        RedditService {
 
-    private val _redditApiService: RedditApi
-
-    @Inject
-    constructor(_redditApiService: RedditApi){
-        this._redditApiService = _redditApiService
-    }
-
-    override fun fetchPosts() : Observable<List<RedditPost>> {
-        return _redditApiService.getPostList().map(this::_convertApiToModel)
+    override fun fetchPosts(limit: Int, afterID: String?) : Observable<List<RedditPost>> {
+        return _redditApiService.getPostList(limit, afterID ).map(this::_convertApiToModel)
     }
 
     private fun _convertApiToModel(class_object : ResponseData): List<RedditPost>{
-        return class_object.data.children.map { RedditPost(it.data.title, it.data.url, it.data.ups) }
+        return class_object.data.children.map { RedditPost(it.data.name, it.data.title, it.data.url, it.data.ups) }
     }
 }
