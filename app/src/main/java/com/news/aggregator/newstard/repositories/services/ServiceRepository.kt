@@ -1,12 +1,10 @@
 package com.news.aggregator.newstard.repositories.services
 
 import com.news.aggregator.newstard.R
-import io.reactivex.Observable
-import io.reactivex.rxkotlin.toObservable
 
 interface ServiceRepository {
 
-    fun getServices(): Observable<NewsService>
+    fun getServices(): List<NewsService>
 }
 
 class ServiceRepositoryImp: ServiceRepository {
@@ -19,7 +17,7 @@ class ServiceRepositoryImp: ServiceRepository {
     /**
      * Return services as observable
      */
-    override fun getServices(): Observable<NewsService>{
-        return _services.toObservable()
+    override fun getServices(): List<NewsService>{
+        return _services
     }
 }
