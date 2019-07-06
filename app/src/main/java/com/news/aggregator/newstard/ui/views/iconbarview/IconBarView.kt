@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.news.aggregator.newstard.R
-import com.news.aggregator.newstard.models.NewsService
+import com.news.aggregator.newstard.repositories.services.NewsService
 
 class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayout(context, attributeSet) {
 
@@ -20,7 +20,7 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
     val layout: ConstraintLayout = inflate(context, R.layout.view_icon_bar_layout, this) as ConstraintLayout
 
     // Data binding Variables
-    var services: Array<NewsService>? = null
+    var  services: List<NewsService>? = null
     set(value){
         field = value
 
@@ -36,7 +36,7 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
     /**
      * Add services as child view in linear layout
      */
-    private fun renderServicesAsImageIcons(services: Array<NewsService>) {
+    private fun renderServicesAsImageIcons(services: List<NewsService>) {
         val container: LinearLayout = findViewById(R.id.viewIconBarImageIconLayout)
         services.forEach { container.addView(getViewForService(it)) }
     }

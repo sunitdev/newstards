@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="services"
-                type="com.news.aggregator.newstard.models.NewsService[]"/>
+                type="java.util.List&lt;com.news.aggregator.newstard.repositories.services.NewsService&gt;"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

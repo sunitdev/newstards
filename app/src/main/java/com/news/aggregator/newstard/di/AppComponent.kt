@@ -3,6 +3,7 @@ package com.news.aggregator.newstard.di
 import android.app.Application
 import com.news.aggregator.newstard.App
 import com.news.aggregator.newstard.di.modules.ActivityModule
+import com.news.aggregator.newstard.di.modules.AppModule
 import com.news.aggregator.newstard.di.modules.FragmentModule
 import com.news.aggregator.newstard.di.modules.ServicesModule
 import dagger.BindsInstance
@@ -12,6 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AndroidSupportInjectionModule::class,
+                    AppModule::class,
                     ServicesModule::class,
                     ActivityModule::class,
                     FragmentModule::class,

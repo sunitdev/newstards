@@ -1,4 +1,4 @@
-package com.news.aggregator.newstard.models
+package com.news.aggregator.newstard.repositories.services
 
 /**
  * Class to represent news services
