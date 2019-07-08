@@ -26,7 +26,9 @@
                 android:textColor="@color/darkTextForground"
                 android:textStyle="bold"
                 tools:text="Post Title"
-                tools:textColor="?attr/colorTextForeground"/>
+                tools:textColor="?attr/colorTextForeground"
+                android:maxLines="2"
+                android:ellipsize="end"/>
 
         <View
             android:layout_width="match_parent"

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Newstard</string>
+    <string name="package_name_reddit">"com.reddit.frontpage"</string>
 </resources>
