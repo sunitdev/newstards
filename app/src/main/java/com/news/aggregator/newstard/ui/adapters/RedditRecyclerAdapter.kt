@@ -5,16 +5,20 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_ACTIVITIES
 import android.net.Uri
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.FragmentRedditListItemLayoutBinding
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.activities.WebViewActivity
+import java.util.*
 import javax.inject.Inject
+
 
 class RedditRecyclerAdapter
     @Inject constructor(private val _context: Context):
@@ -101,4 +105,14 @@ class RedditRecyclerAdapter
             return intent
         }
     }
+}
+
+@BindingAdapter("bind:setPostTime")
+fun setPostTime(view: TextView, creationTimeStamp: Long){
+    val currentTimeStamp = Calendar.getInstance().timeInMillis / 1000
+
+    val timeSequence = DateUtils.getRelativeTimeSpanString(creationTimeStamp, currentTimeStamp,
+        DateUtils.HOUR_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE)
+
+    view.text = timeSequence.toString()
 }
