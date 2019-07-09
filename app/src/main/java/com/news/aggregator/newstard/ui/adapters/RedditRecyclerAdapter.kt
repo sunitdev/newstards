@@ -49,16 +49,16 @@ class RedditRecyclerAdapter
     inner class PostViewHolder(private val itemLayoutBinding: FragmentRedditListItemLayoutBinding):
         RecyclerView.ViewHolder(itemLayoutBinding.root) {
 
-        private val packageName = _context.resources.getString(R.string.package_name_reddit)
+        private val packageName = "com.reddit.frontpage"
 
         fun bindPost(post: RedditPost){
             itemLayoutBinding.post = post
-            itemLayoutBinding.redditListPostTitle.setOnClickListener{
+            itemLayoutBinding.root.setOnClickListener{
 
                 val intent: Intent = if (_isRedditInstalled()){
-                    _getRedditAppIntent(post.link)
+                    _getRedditAppIntent(post)
                 } else{
-                    _getWebViewIntent(post.link)
+                    _getWebViewIntent(post)
                 }
 
                 _context.startActivity(intent)
@@ -66,33 +66,38 @@ class RedditRecyclerAdapter
         }
 
         private fun _isRedditInstalled(): Boolean{
-            val packageManager = _context.packageManager
-
-            var isPackageInstalled: Boolean
-
-            try{
-                packageManager.getPackageInfo(packageName, GET_ACTIVITIES)
-                isPackageInstalled = true
+            try {
+                _context.packageManager.getPackageInfo(packageName, GET_ACTIVITIES)
+                return true
             }
             catch (e: PackageManager.NameNotFoundException){
-                isPackageInstalled = false
+                return false
             }
-
-            return isPackageInstalled
         }
 
-        private fun _getWebViewIntent(url:String): Intent{
+        private fun _getWebViewIntent(post: RedditPost): Intent{
             val intent =  Intent(_context, WebViewActivity::class.java)
-            intent.putExtra(WebViewActivity.EXTRA_URL, url)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+            with(intent){
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+                putExtra(WebViewActivity.EXTRA_URL, post.link)
+                putExtra(WebViewActivity.EXTRA_TITLE, post.title)
+            }
+
             return intent
         }
 
-        private fun _getRedditAppIntent(url:String): Intent{
+        private fun _getRedditAppIntent(post: RedditPost): Intent{
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setPackage(packageName)
-            intent.data = Uri.parse(url)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+            with(intent){
+                data = Uri.parse(post.link)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+                setPackage(packageName)
+
+            }
             return intent
         }
     }

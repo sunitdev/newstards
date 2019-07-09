@@ -19,6 +19,9 @@ class RedditServiceImpl
     }
 
     private fun _convertApiToModel(class_object : ResponseData): List<RedditPost>{
-        return class_object.data.children.map { RedditPost(it.data.name, it.data.title, it.data.url, it.data.ups) }
+        return class_object.data.children.map {
+            RedditPost(id=it.data.name, title=it.data.title,
+                link="https://reddit.com${it.data.permalink}")
+        }
     }
 }

@@ -21,7 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.WebViewActivity"/>
+
+        <!-- WebView Activity -->
+        <activity
+                android:name=".ui.activities.WebViewActivity"
+                android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 
 </manifest>
