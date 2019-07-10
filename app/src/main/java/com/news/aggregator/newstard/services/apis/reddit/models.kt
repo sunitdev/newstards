@@ -11,4 +11,5 @@ data class PostData(var name: String,
                     var title: String,
                     var author: String,
                     var created_utc: Long,
-                    var permalink: String)
+                    var permalink: String,
+                    var num_comments: Int)

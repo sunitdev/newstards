@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.news.aggregator.newstard.ui.databinding.AdaptersKt"/>
+
         <variable
                 name="post"
                 type="com.news.aggregator.newstard.repositories.reddit.RedditPost"/>
@@ -12,79 +14,87 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
-        <TextView
-                android:id="@+id/redditAuthorText"
-                android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/redditListLayoutPostText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.9"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:text="Posted By: "
-                android:textSize="12sp"
-                tools:textColor="@color/redditColor"
-                android:textColor="@color/darkTextForground"/>
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-                android:id="@+id/redditListPostAuthor"
+            <TextView
+                    android:id="@+id/redditListPostTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text='@{post.title}'
+                    android:textColor="@color/darkTextForground"
+                    android:textStyle="bold"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    tools:text="Post Title"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/redditListPostTitle">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/darkTextForground"
+                        android:text="@{`Posted By: ` + post.authorName + `, ` }"
+                        tools:text="Posted By Author, "/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/darkTextForground"
+                        app:setTimeAgo="@{post.createdAt}"
+                        tools:text="Post Time"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintStart_toEndOf="@id/redditAuthorText"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Post Author"
-                android:textSize="12sp"
-                android:textColor="@color/darkTextForground"
-                tools:textColor="@color/redditColor"
-                android:text="@{post.author}"/>
+                app:layout_constraintLeft_toRightOf="@+id/redditListLayoutPostText"
+                android:gravity="center">
 
-        <TextView
-                android:id="@+id/redditListPostTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginLeft="1dp"
-                app:layout_constraintStart_toEndOf="@id/redditListPostAuthor"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Post Time"
-                android:textSize="12sp"
-                android:textColor="@color/darkTextForground"
-                app:setPostTime="@{post.time_ago}"/>
+            <ImageView android:layout_width="24dp"
+                       android:layout_height="24dp"
+                       android:src="@drawable/reddit_comment_icon"/>
 
-        <TextView
-                android:id="@+id/redditListPostTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/redditListPostAuthor"
-                android:layout_margin="10dp"
-                android:text='@{post.title}'
-                android:textColor="@color/darkTextForground"
-                android:textStyle="bold"
-                tools:text="Post Title"
-                tools:textColor="?attr/colorTextForeground"
-                android:maxLines="2"
-                android:ellipsize="end"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center_horizontal"
+                      android:textColor="@color/darkTextForground"
+                      android:textSize="12sp"
+                      android:layout_marginTop="2dp"
+                      app:setHumanizeNumber="@{post.numberOfComments}"
+                      tools:text="12k"/>
 
+        </LinearLayout>
 
         <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
-                app:layout_constraintTop_toBottomOf="@id/redditListPostTitle"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/redditListLayoutPostText"
                 android:background="@color/redditColor"
                 tools:layout_editor_absoluteX="10dp"/>
 

@@ -1,8 +1,5 @@
 package com.news.aggregator.newstard.services.apis.reddit
 
-import android.os.SystemClock
-import android.text.format.DateUtils
-import android.util.Log
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import io.reactivex.Observable
 import java.util.*
@@ -28,8 +25,17 @@ class RedditServiceImpl
             RedditPost(id=it.data.name,
                 title=it.data.title,
                 link="https://reddit.com${it.data.permalink}",
-                author = it.data.author,
-                time_ago = it.data.created_utc)
+                authorName = it.data.author,
+                createdAt = _convertCreatedAtToLocal(it.data.created_utc),
+                numberOfComments = it.data.num_comments)
         }
     }
+
+    private fun _convertCreatedAtToLocal(utcTimeStamp: Long): Calendar {
+        val dateTime = Calendar.getInstance()
+        // API returns timestamp in seconds.
+        dateTime.timeInMillis = utcTimeStamp * 1000L
+        return dateTime
+    }
+
 }
