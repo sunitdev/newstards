@@ -25,6 +25,11 @@ class RedditFragmentViewModel
         _pagedPostLiveData = LivePagedListBuilder(redditPostDataSourceFactory, pageListConfig).build()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        redditPostDataSourceFactory.redditPostDataSource.clear()
+    }
+
     fun getPagedPostData() = _pagedPostLiveData
 
     fun getInitalLoadingState(): LiveData<NetworkState> {

@@ -1,6 +1,5 @@
 package com.news.aggregator.newstard.ui.fargments
 
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
@@ -33,10 +32,17 @@ class RedditFragment: BaseFragment<RedditFragmentViewModel, FragmentRedditLayout
                     NetworkState.States.LOADING -> {
                         layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
                         layoutBinding.redditLayoutRecyclerView.visibility = View.GONE
+                        layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
                     }
                     NetworkState.States.SUCCESS -> {
                         layoutBinding.redditLayoutProgressBar.visibility = View.GONE
                         layoutBinding.redditLayoutRecyclerView.visibility = View.VISIBLE
+                        layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
+                    }
+                    NetworkState.States.ERROR -> {
+                        layoutBinding.redditLayoutProgressBar.visibility = View.GONE
+                        layoutBinding.redditLayoutRecyclerView.visibility = View.GONE
+                        layoutBinding.redditLayoutErrorLayout.visibility = View.VISIBLE
                     }
                 }
             }

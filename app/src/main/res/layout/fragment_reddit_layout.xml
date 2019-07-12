@@ -23,5 +23,12 @@
                 android:layout_height="wrap_content"
                 android:indeterminateTint="@color/redditColor"/>
 
+        <TextView
+                android:id="@+id/redditLayoutErrorLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkTextForeground"
+                android:text="Error In Network"/>
+
     </LinearLayout>
 </layout>
