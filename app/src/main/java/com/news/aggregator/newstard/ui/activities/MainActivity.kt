@@ -1,6 +1,5 @@
 package com.news.aggregator.newstard.ui.activities
 
-import androidx.viewpager.widget.ViewPager
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.ActivityMainBinding
 import com.news.aggregator.newstard.ui.adapters.MainActivityFragmentAdapter
@@ -20,17 +19,15 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 
         layoutBinding.services = services
 
-        _setupViewPager()
+        setupViewPager()
 
         // Set selected icon for iconbar
         // TODO: Replace this with adapter
         findViewById<IconBarView>(R.id.mainActivityIconBar).selectedNewsService = services[0]
     }
 
-    private fun _setupViewPager(){
-        val viewPager = layoutBinding.root.findViewById<ViewPager>(R.id.mainActivityViewPage)
-        viewPager.adapter = MainActivityFragmentAdapter(supportFragmentManager)
-
+    private fun setupViewPager(){
+        layoutBinding.mainActivityViewPage.adapter = MainActivityFragmentAdapter(supportFragmentManager)
     }
 
 }

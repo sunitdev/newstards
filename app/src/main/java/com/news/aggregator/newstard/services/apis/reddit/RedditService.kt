@@ -16,22 +16,22 @@ class RedditServiceImpl
         RedditService {
 
     override fun fetchPosts(limit: Int, afterID: String?) : Observable<List<RedditPost>> {
-        return _redditApiService.getPostList(limit, afterID ).map(this::_convertApiToModel)
+        return _redditApiService.getPostList(limit, afterID ).map(this::convertApiToModel)
     }
 
-    private fun _convertApiToModel(class_object : ResponseData): List<RedditPost>{
+    private fun convertApiToModel(class_object : ResponseData): List<RedditPost>{
 
         return class_object.data.children.map {
             RedditPost(id=it.data.name,
                 title=it.data.title,
                 link="https://reddit.com${it.data.permalink}",
                 authorName = it.data.author,
-                createdAt = _convertCreatedAtToLocal(it.data.created_utc),
+                createdAt = convertCreatedAtToLocal(it.data.created_utc),
                 numberOfComments = it.data.num_comments)
         }
     }
 
-    private fun _convertCreatedAtToLocal(utcTimeStamp: Long): Calendar {
+    private fun convertCreatedAtToLocal(utcTimeStamp: Long): Calendar {
         val dateTime = Calendar.getInstance()
         // API returns timestamp in seconds.
         dateTime.timeInMillis = utcTimeStamp * 1000L

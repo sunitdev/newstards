@@ -37,7 +37,7 @@ class RedditFragmentViewModel
     }
 
     fun getPaginationLoadingSate(): LiveData<NetworkState> {
-        return redditPostDataSourceFactory.redditPostDataSource.getPagginationLoadStateLiveData()
+        return redditPostDataSourceFactory.redditPostDataSource.getPaginationLoadStateLiveData()
     }
 
 }

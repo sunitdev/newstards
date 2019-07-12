@@ -13,5 +13,6 @@ interface RedditApi{
      * API endpoint to get list of all reddit posts in JSON format
      */
     @GET("/.json")
-    fun getPostList(@Query("limit") limit: Int, @Query("after") after: String?): Observable<ResponseData>
+    fun getPostList(@Query("limit") limit: Int,
+                    @Query("after") after: String?): Observable<ResponseData>
 }

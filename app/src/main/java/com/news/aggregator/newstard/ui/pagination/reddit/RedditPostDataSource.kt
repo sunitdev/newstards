@@ -15,7 +15,7 @@ class RedditPostDataSource
         ItemKeyedDataSource<String, RedditPost>() {
 
     private val initialLoadStateLiveData = MutableLiveData<NetworkState>()
-    private val pagginationLoadStateLiveData = MutableLiveData<NetworkState>()
+    private val paginationLoadStateLiveData = MutableLiveData<NetworkState>()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -23,7 +23,7 @@ class RedditPostDataSource
     private lateinit var _lastPaginationCallback: LoadCallback<RedditPost>
 
     companion object{
-        val PAGE_SIZE = 25
+        const val PAGE_SIZE = 25
     }
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<RedditPost>) {
@@ -49,17 +49,17 @@ class RedditPostDataSource
         _lastPaginationParams = params
         _lastPaginationCallback = callback
 
-        pagginationLoadStateLiveData.postValue(NetworkState.LOADING)
+        paginationLoadStateLiveData.postValue(NetworkState.LOADING)
 
         val postListDisposable = _redditRepository.getPosts(PAGE_SIZE, params.key)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                pagginationLoadStateLiveData.postValue(NetworkState.SUCCESS)
+                paginationLoadStateLiveData.postValue(NetworkState.SUCCESS)
 
                 callback.onResult(it)
             }, {
-                pagginationLoadStateLiveData.postValue(NetworkState.ERROR)
+                paginationLoadStateLiveData.postValue(NetworkState.ERROR)
             })
 
         compositeDisposable.add(postListDisposable)
@@ -73,7 +73,7 @@ class RedditPostDataSource
 
     fun getInitialLoadStateLiveData() = initialLoadStateLiveData
 
-    fun getPagginationLoadStateLiveData() = pagginationLoadStateLiveData
+    fun getPaginationLoadStateLiveData() = paginationLoadStateLiveData
 
     fun clear() {
         compositeDisposable.clear()

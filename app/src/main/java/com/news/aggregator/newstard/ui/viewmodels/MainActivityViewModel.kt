@@ -5,17 +5,11 @@ import com.news.aggregator.newstard.repositories.services.NewsService
 import com.news.aggregator.newstard.repositories.services.ServiceRepository
 import javax.inject.Inject
 
-class MainActivityViewModel: ViewModel {
-
-    private val serviceRepository: ServiceRepository
-
-    @Inject
-    constructor(serviceRepository: ServiceRepository){
-        this.serviceRepository = serviceRepository
-    }
+class MainActivityViewModel @Inject constructor(private val serviceRepository: ServiceRepository):
+    ViewModel() {
 
     /**
      * Return currently active services
      */
-    fun getServices(): List<NewsService> = serviceRepository.getServices()
+    fun getServices() = serviceRepository.getServices()
 }

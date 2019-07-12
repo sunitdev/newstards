@@ -14,7 +14,7 @@ import com.news.aggregator.newstard.repositories.services.NewsService
 class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayout(context, attributeSet) {
 
     // Class level extension function
-    private fun Float.toDP(): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics).toInt()
+    private fun Float.toDP() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics).toInt()
 
     // Layout for View
     val layout: ConstraintLayout = inflate(context, R.layout.view_icon_bar_layout, this) as ConstraintLayout
@@ -92,7 +92,6 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
     }
 
     private fun handleImageButtonClicked(view: ImageButton, service: NewsService) {
-        Log.e("Sunit", "Service Clicked: "+service.toString())
     }
 
     /**

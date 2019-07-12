@@ -8,9 +8,6 @@ class RedditPostDataSourceFactory
     @Inject constructor(val redditPostDataSource: RedditPostDataSource):
         DataSource.Factory<String, RedditPost>() {
 
-    override fun create(): DataSource<String, RedditPost> {
-        // Not using di because new instance is required on each call
-        return redditPostDataSource
-    }
+    override fun create() = redditPostDataSource
 
 }

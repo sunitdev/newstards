@@ -11,9 +11,8 @@ import javax.inject.Singleton
  * Create a generic mapping for viewmodel and provider to provide dagger inject for viewmodel
  */
 @Singleton
-class ViewModelFactory @Inject
-    constructor(private val _viewModelProviderMapping: Map<Class<out ViewModel>,
-                @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
+class ViewModelFactory @Inject constructor(private val _viewModelProviderMapping: Map<Class<out ViewModel>, Provider<ViewModel>>) :
+    ViewModelProvider.Factory {
 
 
     /**
@@ -22,12 +21,12 @@ class ViewModelFactory @Inject
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
 
         // Check if provider already exists
-        var provider = this._viewModelProviderMapping!!.get(modelClass)
+        var provider = this._viewModelProviderMapping.get(modelClass)
 
         // Check provider from subclass
         if (provider == null) {
 
-            for (entry in this._viewModelProviderMapping!!.entries) {
+            for (entry in this._viewModelProviderMapping.entries) {
                 if (modelClass.isAssignableFrom(entry.key)) {
                     provider = entry.value
                 }
@@ -36,7 +35,7 @@ class ViewModelFactory @Inject
 
         // If provider is not found then raise exception
         if (provider == null) {
-            throw IllegalArgumentException("Invalid model class ${modelClass}. Did you forgot to add ViewModel binding in ViewModelModule?")
+            throw IllegalArgumentException("Invalid model class $modelClass. Did you forgot to add ViewModel binding in ViewModelModule?")
         }
 
         //Try creating viewmodel instance from provider

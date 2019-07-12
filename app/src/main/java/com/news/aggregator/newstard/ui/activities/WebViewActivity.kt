@@ -21,35 +21,33 @@ class WebViewActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _initLayout()
+        initLayout()
 
-        _initToolBar()
+        initToolBar()
 
-        _initEventHandlers()
+        initEventHandlers()
 
-        _initWebView()
+        initWebView()
     }
 
-    private fun _initLayout(){
+    private fun initLayout(){
         layoutBinding = DataBindingUtil.setContentView(this, R.layout.activity_webview)
     }
 
-    private fun _initToolBar(){
+    private fun initToolBar(){
         setSupportActionBar(layoutBinding.webViewActivityToolbar)
 
-        _setToolbarTitle()
+        setToolbarTitle()
 
-        _setToolbarBackgroud()
+        setToolbarBackgroud()
     }
 
-    private fun _initEventHandlers(){
+    private fun initEventHandlers(){
         // Close button event handler
-        layoutBinding.webViewActivityCloseIcon.setOnClickListener {
-            finish()
-        }
+        layoutBinding.webViewActivityCloseIcon.setOnClickListener { finish() }
     }
 
-    private fun _initWebView(){
+    private fun initWebView(){
 
         // Webview settings
         with(layoutBinding.webViewActivityWebView.settings){
@@ -60,25 +58,25 @@ class WebViewActivity : AppCompatActivity(){
         with(layoutBinding.webViewActivityWebView){
             webViewClient = WebViewClient()
 
-            loadUrl(_getUrlFromIntent())
+            loadUrl(getUrlFromIntent())
         }
     }
 
 
-    private fun _setToolbarTitle(){
-        _getTitleFromIntent()?.let { layoutBinding.webViewActivityTitle.text = it }
+    private fun setToolbarTitle(){
+        getTitleFromIntent()?.let { layoutBinding.webViewActivityTitle.text = it }
     }
 
-    private fun _setToolbarBackgroud() {
-        val headerBackgroundColor = _getHeaderBackgroundFromIntent()
+    private fun setToolbarBackgroud() {
+        val headerBackgroundColor = getHeaderBackgroundFromIntent()
         if(headerBackgroundColor != -1) {
             layoutBinding.webViewActivityToolbar.setBackgroundColor(headerBackgroundColor)
         }
     }
 
-    private fun _getUrlFromIntent() = intent.getStringExtra(EXTRA_URL)
+    private fun getUrlFromIntent() = intent.getStringExtra(EXTRA_URL)
 
-    private fun _getTitleFromIntent() = intent.getStringExtra(EXTRA_TITLE)
+    private fun getTitleFromIntent() = intent.getStringExtra(EXTRA_TITLE)
 
-    private fun _getHeaderBackgroundFromIntent() = intent.getIntExtra(EXTRA_HEADER_BACKGROUND, -1)
+    private fun getHeaderBackgroundFromIntent() = intent.getIntExtra(EXTRA_HEADER_BACKGROUND, -1)
 }

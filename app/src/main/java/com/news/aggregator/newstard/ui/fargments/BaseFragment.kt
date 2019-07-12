@@ -33,11 +33,11 @@ abstract class BaseFragment<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     protected open fun bindLayoutVariables(){}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _configureDagger()
+        configureDagger()
 
-        _initViewModel()
+        initViewModel()
 
-        _initDataBindingLayout(inflater, container)
+        initDataBindingLayout(inflater, container)
 
         bindLayoutVariables()
 
@@ -47,14 +47,14 @@ abstract class BaseFragment<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     /**
      * Inject dagger dependencies
      */
-    private fun _configureDagger(){
+    private fun configureDagger(){
         AndroidSupportInjection.inject(this)
     }
 
     /**
      * Init viewmodel instance
      */
-    private fun _initViewModel() {
+    private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
     }
 
@@ -68,7 +68,7 @@ abstract class BaseFragment<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     /**
      * Init databinding layout variable
      */
-    private fun _initDataBindingLayout(inflater: LayoutInflater, container: ViewGroup?) {
+    private fun initDataBindingLayout(inflater: LayoutInflater, container: ViewGroup?) {
         layoutBinding = DataBindingUtil.inflate(inflater, getLayoutResource(), container, false)
     }
 

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
 import com.news.aggregator.newstard.di.DaggerAppComponent
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -19,9 +18,9 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
     @Inject
     lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
 
-    override fun activityInjector(): AndroidInjector<Activity> = activityDispatchingAndroidInjector
+    override fun activityInjector() = activityDispatchingAndroidInjector
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> = supportFragmentInjector
+    override fun supportFragmentInjector() = supportFragmentInjector
 
     override fun onCreate() {
         super.onCreate()

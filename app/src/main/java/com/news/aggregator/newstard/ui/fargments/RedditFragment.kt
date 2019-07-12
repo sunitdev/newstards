@@ -8,7 +8,7 @@ import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.FragmentRedditLayoutBinding
 import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
-import com.news.aggregator.newstard.ui.adapters.RedditRecyclerAdapter
+import com.news.aggregator.newstard.ui.adapters.reddit.RedditRecyclerAdapter
 import com.news.aggregator.newstard.ui.viewmodels.RedditFragmentViewModel
 import javax.inject.Inject
 
@@ -53,10 +53,8 @@ class RedditFragment: BaseFragment<RedditFragmentViewModel, FragmentRedditLayout
 
     private fun _initRecyclerView(){
 
-        viewModel.getPagedPostData().observe(this, object:Observer<PagedList<RedditPost>>{
-            override fun onChanged(posts: PagedList<RedditPost>?) {
-                redditRecyclerAdapter.submitList(posts)
-            }
+        viewModel.getPagedPostData().observe(this, Observer<PagedList<RedditPost>>{
+                redditRecyclerAdapter.submitList(it)
         })
 
         with(layoutBinding.redditLayoutRecyclerView){

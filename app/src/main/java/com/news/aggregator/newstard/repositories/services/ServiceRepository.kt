@@ -17,7 +17,6 @@ class ServiceRepositoryImp: ServiceRepository {
     /**
      * Return services as observable
      */
-    override fun getServices(): List<NewsService>{
-        return _services
-    }
+    override fun getServices() = _services
+
 }

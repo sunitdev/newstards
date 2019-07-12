@@ -34,24 +34,24 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
 
-        _handleOnCreate()
+        handleOnCreate()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _handleOnCreate()
+        handleOnCreate()
     }
 
     /**
      * Handle onCreate callback
      */
-    private fun _handleOnCreate(){
-        _configureDagger()
+    private fun handleOnCreate(){
+        configureDagger()
 
-        _initViewModel()
+        initViewModel()
 
-        _initDataBindingLayout()
+        initDataBindingLayout()
 
         bindLayoutVariables()
     }
@@ -59,14 +59,14 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     /**
      * Inject dagger dependencies
      */
-    private fun _configureDagger(){
+    private fun configureDagger(){
         AndroidInjection.inject(this)
     }
 
     /**
      * Init viewmodel instance
      */
-    private fun _initViewModel() {
+    private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
     }
 
@@ -80,7 +80,7 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     /**
      * Init databinding layout variable
      */
-    private fun _initDataBindingLayout() {
+    private fun initDataBindingLayout() {
         layoutBinding = DataBindingUtil.setContentView(this, getLayoutResource())
     }
 
