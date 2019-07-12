@@ -24,9 +24,53 @@ class RedditRecyclerAdapter @Inject constructor(private val _context: Context) :
     private var isExtraRowAdded = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(_context)
+        return getViewHolderFromViewType(LayoutInflater.from(_context), parent, viewType)
+    }
 
-        return when(viewType){
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+        when (getItemViewType(position)) {
+            R.layout.fragment_reddit_list_item_layout -> {
+                val post = getItem(position)
+                post?.let { (holder as RedditPostItemViewHolder).bindPost(it) }
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        // Return view type based on position and network state
+        if (isExtraRowAdded && position == itemCount - 1) {
+            if (currentPaginationState == NetworkState.LOADING) {
+                return R.layout.fragment_reddit_list_loading_layout
+            } else {
+                return R.layout.fragment_reddit_list_error_layout
+            }
+        } else {
+            return R.layout.fragment_reddit_list_item_layout
+        }
+    }
+
+    fun setPaginationNetworkState(networkState: NetworkState) {
+        currentPaginationState = networkState
+
+        // Check if to add loading/error item at last or remove item
+        if (currentPaginationState == NetworkState.SUCCESS && isExtraRowAdded) {
+
+            isExtraRowAdded = false
+            notifyItemRemoved(itemCount - 1)
+
+        } else {
+            if (isExtraRowAdded) {
+                notifyItemChanged(itemCount - 1)
+            } else {
+                isExtraRowAdded = true
+                notifyItemInserted(itemCount)
+            }
+        }
+    }
+
+    private fun getViewHolderFromViewType(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
             R.layout.fragment_reddit_list_loading_layout -> {
                 val layoutBinding = FragmentRedditListLoadingLayoutBinding.inflate(inflater, parent, false)
                 RedditLoadingViewHolder(layoutBinding)
@@ -40,48 +84,7 @@ class RedditRecyclerAdapter @Inject constructor(private val _context: Context) :
                 RedditPostItemViewHolder(layoutBinding, _context)
             }
         }
-
     }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-        when(getItemViewType(position)){
-            R.layout.fragment_reddit_list_item_layout -> {
-                val post = getItem(position)
-                post?.let { (holder as RedditPostItemViewHolder).bindPost(it) }
-            }
-        }
-
-    }
-
-    fun setPaginationNetworkState(networkState: NetworkState) {
-        currentPaginationState = networkState
-
-        if (currentPaginationState == NetworkState.SUCCESS && isExtraRowAdded) {
-            isExtraRowAdded = false
-            notifyItemRemoved(itemCount - 1)
-        } else {
-            if (isExtraRowAdded) {
-                notifyItemChanged(itemCount - 1)
-            } else {
-                isExtraRowAdded = true
-                notifyItemInserted(itemCount)
-            }
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        if(isExtraRowAdded && position == itemCount - 1){
-            if(currentPaginationState == NetworkState.LOADING){
-                return R.layout.fragment_reddit_list_loading_layout
-            }else {
-                return R.layout.fragment_reddit_list_error_layout
-            }
-        }else{
-            return R.layout.fragment_reddit_list_item_layout
-        }
-    }
-
 
 }
 

@@ -19,9 +19,6 @@ class RedditPostDataSource
 
     private val compositeDisposable = CompositeDisposable()
 
-    private lateinit var _lastPaginationParams: LoadParams<String>
-    private lateinit var _lastPaginationCallback: LoadCallback<RedditPost>
-
     companion object{
         const val PAGE_SIZE = 25
     }
@@ -46,8 +43,6 @@ class RedditPostDataSource
     }
 
     override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<RedditPost>) {
-        _lastPaginationParams = params
-        _lastPaginationCallback = callback
 
         paginationLoadStateLiveData.postValue(NetworkState.LOADING)
 
@@ -69,7 +64,7 @@ class RedditPostDataSource
         // Previous data will be already present.
     }
 
-    override fun getKey(item: RedditPost): String = item.id
+    override fun getKey(item: RedditPost) = item.id
 
     fun getInitialLoadStateLiveData() = initialLoadStateLiveData
 
