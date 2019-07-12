@@ -1,10 +1,13 @@
 package com.news.aggregator.newstard.ui.fargments
 
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.FragmentRedditLayoutBinding
+import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.adapters.RedditRecyclerAdapter
 import com.news.aggregator.newstard.ui.viewmodels.RedditFragmentViewModel
@@ -23,6 +26,21 @@ class RedditFragment: BaseFragment<RedditFragmentViewModel, FragmentRedditLayout
         super.bindLayoutVariables()
 
         _initRecyclerView()
+
+        viewModel.getInitalLoadingState().observe(this, object:Observer<NetworkState>{
+            override fun onChanged(state: NetworkState?) {
+                when(state!!.state){
+                    NetworkState.States.LOADING -> {
+                        layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
+                        layoutBinding.redditLayoutRecyclerView.visibility = View.GONE
+                    }
+                    NetworkState.States.SUCCESS -> {
+                        layoutBinding.redditLayoutProgressBar.visibility = View.GONE
+                        layoutBinding.redditLayoutRecyclerView.visibility = View.VISIBLE
+                    }
+                }
+            }
+        })
     }
 
     private fun _initRecyclerView(){

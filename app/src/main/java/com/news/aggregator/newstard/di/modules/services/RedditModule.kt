@@ -7,6 +7,7 @@ import com.news.aggregator.newstard.services.apis.reddit.RedditApi
 import com.news.aggregator.newstard.services.apis.reddit.RedditService
 import com.news.aggregator.newstard.services.apis.reddit.RedditServiceImpl
 import com.news.aggregator.newstard.ui.adapters.RedditRecyclerAdapter
+import com.news.aggregator.newstard.ui.pagination.reddit.RedditPostDataSource
 import com.news.aggregator.newstard.ui.pagination.reddit.RedditPostDataSourceFactory
 import dagger.Module
 import dagger.Provides
@@ -45,8 +46,12 @@ class RedditModule{
 
     @Provides
     @Singleton
-    fun provideRedditDataSourceFactory(redditRepository: RedditRepository): RedditPostDataSourceFactory
-            = RedditPostDataSourceFactory(redditRepository)
+    fun provideRedditDataSource(redditRepository: RedditRepository): RedditPostDataSource = RedditPostDataSource(redditRepository)
+
+    @Provides
+    @Singleton
+    fun provideRedditDataSourceFactory(redditPostDataSource: RedditPostDataSource): RedditPostDataSourceFactory
+            = RedditPostDataSourceFactory(redditPostDataSource)
 
     @Provides
     fun providerRecycleViewAdapter(application: Application): RedditRecyclerAdapter = RedditRecyclerAdapter(application)

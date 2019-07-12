@@ -4,13 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.pagination.reddit.RedditPostDataSource
 import com.news.aggregator.newstard.ui.pagination.reddit.RedditPostDataSourceFactory
 import javax.inject.Inject
 
 class RedditFragmentViewModel
-    @Inject constructor(redditPostDataSourceFactory: RedditPostDataSourceFactory) :
+    @Inject constructor(private val redditPostDataSourceFactory: RedditPostDataSourceFactory) :
         ViewModel() {
 
     private var _pagedPostLiveData: LiveData<PagedList<RedditPost>>
@@ -25,4 +26,9 @@ class RedditFragmentViewModel
     }
 
     fun getPagedPostData() = _pagedPostLiveData
+
+    fun getInitalLoadingState(): LiveData<NetworkState> {
+        return redditPostDataSourceFactory.redditPostDataSource.getInitialLoadStateLiveData()
+    }
+
 }
