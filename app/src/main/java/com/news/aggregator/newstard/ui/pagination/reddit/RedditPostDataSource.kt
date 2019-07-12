@@ -1,6 +1,5 @@
 package com.news.aggregator.newstard.ui.pagination.reddit
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.news.aggregator.newstard.network.NetworkState
@@ -8,8 +7,6 @@ import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.repositories.reddit.RedditRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import io.reactivex.disposables.Disposables
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -31,18 +28,18 @@ class RedditPostDataSource
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<RedditPost>) {
 
-        initialLoadStateLiveData.postValue(NetworkState.getLoadingState())
+        initialLoadStateLiveData.postValue(NetworkState.LOADING)
 
         val postListDisposable = _redditRepository.getPosts(PAGE_SIZE, null)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-                initialLoadStateLiveData.postValue(NetworkState.getSuccessState())
+                initialLoadStateLiveData.postValue(NetworkState.SUCCESS)
 
                 callback.onResult(it)
             }, {
-                initialLoadStateLiveData.postValue(NetworkState.getErrorState())
+                initialLoadStateLiveData.postValue(NetworkState.ERROR)
             })
 
         compositeDisposable.add(postListDisposable)
@@ -52,17 +49,17 @@ class RedditPostDataSource
         _lastPaginationParams = params
         _lastPaginationCallback = callback
 
-        pagginationLoadStateLiveData.postValue(NetworkState.getLoadingState())
+        pagginationLoadStateLiveData.postValue(NetworkState.LOADING)
 
         val postListDisposable = _redditRepository.getPosts(PAGE_SIZE, params.key)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                pagginationLoadStateLiveData.postValue(NetworkState.getSuccessState())
+                pagginationLoadStateLiveData.postValue(NetworkState.SUCCESS)
 
                 callback.onResult(it)
             }, {
-                pagginationLoadStateLiveData.postValue(NetworkState.getErrorState())
+                pagginationLoadStateLiveData.postValue(NetworkState.ERROR)
             })
 
         compositeDisposable.add(postListDisposable)

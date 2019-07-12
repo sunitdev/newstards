@@ -75,7 +75,7 @@ class RedditRecyclerAdapter
     fun setPaginationNetworkState(networkState: NetworkState) {
         currentPaginationState = networkState
 
-        if (currentPaginationState!!.state == NetworkState.States.SUCCESS && isExtraRowAdded) {
+        if (currentPaginationState == NetworkState.SUCCESS && isExtraRowAdded) {
             isExtraRowAdded = false
             notifyItemRemoved(itemCount - 1)
         } else {
@@ -90,7 +90,7 @@ class RedditRecyclerAdapter
 
     override fun getItemViewType(position: Int): Int {
         if(isExtraRowAdded && position == itemCount - 1){
-            if(currentPaginationState!!.state == NetworkState.States.LOADING){
+            if(currentPaginationState == NetworkState.LOADING){
                 return R.layout.fragment_reddit_list_loading_layout
             }else {
                 return R.layout.fragment_reddit_list_error_layout

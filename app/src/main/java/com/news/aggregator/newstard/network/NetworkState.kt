@@ -1,6 +1,6 @@
 package com.news.aggregator.newstard.network
 
-class NetworkState(_state: States) {
+class NetworkState(private val state: States) {
 
     enum class States {
         SUCCESS,
@@ -9,30 +9,25 @@ class NetworkState(_state: States) {
     }
 
     companion object{
+        val SUCCESS
+            get() = NetworkState(States.SUCCESS)
 
+        val ERROR
+            get() = NetworkState(States.ERROR)
 
-        fun getSuccessState(): NetworkState {
-            return NetworkState(States.SUCCESS)
-        }
-
-        fun getLoadingState(): NetworkState {
-            return NetworkState(States.LOADING)
-        }
-
-        fun getErrorState(): NetworkState {
-            return NetworkState(States.ERROR)
-        }
-
-    }
-
-    var state: States
-        private set
-
-    init {
-        state = _state
+        val LOADING
+            get() = NetworkState(States.LOADING)
     }
 
     override fun toString(): String {
         return "Network(state=${state.name})"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if(other is NetworkState){
+            return state == other.state
+        }
+
+        return super.equals(other)
     }
 }
