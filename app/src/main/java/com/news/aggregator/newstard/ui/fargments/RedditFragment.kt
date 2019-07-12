@@ -1,5 +1,6 @@
 package com.news.aggregator.newstard.ui.fargments
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
@@ -26,9 +27,8 @@ class RedditFragment: BaseFragment<RedditFragmentViewModel, FragmentRedditLayout
 
         _initRecyclerView()
 
-        viewModel.getInitalLoadingState().observe(this, object:Observer<NetworkState>{
-            override fun onChanged(state: NetworkState?) {
-                when(state!!.state){
+        viewModel.getInitialLoadingState().observe(this, Observer<NetworkState> {
+                when(it!!.state){
                     NetworkState.States.LOADING -> {
                         layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
                         layoutBinding.redditLayoutRecyclerView.visibility = View.GONE
@@ -45,7 +45,11 @@ class RedditFragment: BaseFragment<RedditFragmentViewModel, FragmentRedditLayout
                         layoutBinding.redditLayoutErrorLayout.visibility = View.VISIBLE
                     }
                 }
-            }
+            })
+
+        viewModel.getPaginationLoadingSate().observe(this, Observer<NetworkState> {
+            Log.e("Sunit", "Pagination Network $it")
+            redditRecyclerAdapter.setPaginationNetworkState(it)
         })
     }
 

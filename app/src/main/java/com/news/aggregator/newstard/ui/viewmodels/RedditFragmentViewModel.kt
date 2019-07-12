@@ -32,8 +32,12 @@ class RedditFragmentViewModel
 
     fun getPagedPostData() = _pagedPostLiveData
 
-    fun getInitalLoadingState(): LiveData<NetworkState> {
+    fun getInitialLoadingState(): LiveData<NetworkState> {
         return redditPostDataSourceFactory.redditPostDataSource.getInitialLoadStateLiveData()
+    }
+
+    fun getPaginationLoadingSate(): LiveData<NetworkState> {
+        return redditPostDataSourceFactory.redditPostDataSource.getPagginationLoadStateLiveData()
     }
 
 }

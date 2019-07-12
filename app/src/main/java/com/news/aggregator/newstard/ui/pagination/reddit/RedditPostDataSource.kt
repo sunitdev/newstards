@@ -18,6 +18,7 @@ class RedditPostDataSource
         ItemKeyedDataSource<String, RedditPost>() {
 
     private val initialLoadStateLiveData = MutableLiveData<NetworkState>()
+    private val pagginationLoadStateLiveData = MutableLiveData<NetworkState>()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -51,10 +52,18 @@ class RedditPostDataSource
         _lastPaginationParams = params
         _lastPaginationCallback = callback
 
+        pagginationLoadStateLiveData.postValue(NetworkState.getLoadingState())
+
         val postListDisposable = _redditRepository.getPosts(PAGE_SIZE, params.key)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { callback.onResult(it) }
+            .subscribe({
+                pagginationLoadStateLiveData.postValue(NetworkState.getSuccessState())
+
+                callback.onResult(it)
+            }, {
+                pagginationLoadStateLiveData.postValue(NetworkState.getErrorState())
+            })
 
         compositeDisposable.add(postListDisposable)
     }
@@ -66,6 +75,8 @@ class RedditPostDataSource
     override fun getKey(item: RedditPost): String = item.id
 
     fun getInitialLoadStateLiveData() = initialLoadStateLiveData
+
+    fun getPagginationLoadStateLiveData() = pagginationLoadStateLiveData
 
     fun clear() {
         compositeDisposable.clear()
