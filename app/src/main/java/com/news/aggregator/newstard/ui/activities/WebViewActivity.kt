@@ -1,7 +1,6 @@
 package com.news.aggregator.newstard.ui.activities
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,8 +13,9 @@ class WebViewActivity : AppCompatActivity(){
     private lateinit var layoutBinding: ActivityWebviewBinding
 
     companion object{
-        val EXTRA_URL = "EXTRA_URL"
-        val EXTRA_TITLE = "EXTRA_TITLE"
+        const val EXTRA_URL = "EXTRA_URL"
+        const val EXTRA_TITLE = "EXTRA_TITLE"
+        const val EXTRA_HEADER_BACKGROUND = "EXTRA_HEADER_BACKGROUND"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,35 +23,29 @@ class WebViewActivity : AppCompatActivity(){
 
         _initLayout()
 
-        _initActionBar()
+        _initToolBar()
+
+        _initEventHandlers()
 
         _initWebView()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
-        return when(item!!.itemId){
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
     private fun _initLayout(){
         layoutBinding = DataBindingUtil.setContentView(this, R.layout.activity_webview)
     }
 
-    private fun _initActionBar(){
-        val actionBarTitle = _getTitleFromIntent()
-        actionBarTitle.let { title=actionBarTitle }
+    private fun _initToolBar(){
+        setSupportActionBar(layoutBinding.webViewActivityToolbar)
 
-        with(supportActionBar!!){
-            setDisplayShowTitleEnabled(true)
+        _setToolbarTitle()
 
-            setHomeAsUpIndicator(android.R.drawable.ic_menu_close_clear_cancel)
-            setDisplayHomeAsUpEnabled(true)
+        _setToolbarBackgroud()
+    }
+
+    private fun _initEventHandlers(){
+        // Close button event handler
+        layoutBinding.webViewActivityCloseIcon.setOnClickListener {
+            finish()
         }
     }
 
@@ -70,7 +64,21 @@ class WebViewActivity : AppCompatActivity(){
         }
     }
 
+
+    private fun _setToolbarTitle(){
+        _getTitleFromIntent()?.let { layoutBinding.webViewActivityTitle.text = it }
+    }
+
+    private fun _setToolbarBackgroud() {
+        val headerBackgroundColor = _getHeaderBackgroundFromIntent()
+        if(headerBackgroundColor != -1) {
+            layoutBinding.webViewActivityToolbar.setBackgroundColor(headerBackgroundColor)
+        }
+    }
+
     private fun _getUrlFromIntent() = intent.getStringExtra(EXTRA_URL)
 
     private fun _getTitleFromIntent() = intent.getStringExtra(EXTRA_TITLE)
+
+    private fun _getHeaderBackgroundFromIntent() = intent.getIntExtra(EXTRA_HEADER_BACKGROUND, -1)
 }

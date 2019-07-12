@@ -7,9 +7,11 @@ import android.content.pm.PackageManager.GET_ACTIVITIES
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.FragmentRedditListItemLayoutBinding
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.activities.WebViewActivity
@@ -83,6 +85,7 @@ class RedditRecyclerAdapter
 
                 putExtra(WebViewActivity.EXTRA_URL, post.link)
                 putExtra(WebViewActivity.EXTRA_TITLE, post.title)
+                putExtra(WebViewActivity.EXTRA_HEADER_BACKGROUND, ContextCompat.getColor(_context, R.color.redditSecondaryColor))
             }
 
             return intent

@@ -30,10 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text='@{post.title}'
-                    android:textColor="@color/darkTextForground"
+                    android:textColor="@color/darkTextForeground"
                     android:textStyle="bold"
-                    android:maxLines="2"
-                    android:ellipsize="end"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     tools:text="Post Title"/>
@@ -50,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:textColor="@color/darkTextForground"
+                        android:textColor="@color/darkTextForeground"
                         android:text="@{`Posted By: ` + post.authorName + `, ` }"
                         tools:text="Posted By Author, "/>
 
@@ -59,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
                         android:textSize="12sp"
-                        android:textColor="@color/darkTextForground"
+                        android:textColor="@color/darkTextForeground"
                         app:setTimeAgo="@{post.createdAt}"
                         tools:text="Post Time"/>
 
@@ -82,7 +80,7 @@
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:gravity="center_horizontal"
-                      android:textColor="@color/darkTextForground"
+                      android:textColor="@color/darkTextForeground"
                       android:textSize="12sp"
                       android:layout_marginTop="2dp"
                       app:setHumanizeNumber="@{post.numberOfComments}"
