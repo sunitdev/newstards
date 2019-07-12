@@ -32,14 +32,15 @@ class WebViewActivity : AppCompatActivity(){
 
     private fun initLayout(){
         layoutBinding = DataBindingUtil.setContentView(this, R.layout.activity_webview)
+
+        with(layoutBinding){
+            title = getTitleFromIntent()
+            headerBackgroundColorResource = getHeaderBackgroundFromIntent()
+        }
     }
 
     private fun initToolBar(){
         setSupportActionBar(layoutBinding.webViewActivityToolbar)
-
-        setToolbarTitle()
-
-        setToolbarBackgroud()
     }
 
     private fun initEventHandlers(){
@@ -62,21 +63,12 @@ class WebViewActivity : AppCompatActivity(){
         }
     }
 
-
-    private fun setToolbarTitle(){
-        getTitleFromIntent()?.let { layoutBinding.webViewActivityTitle.text = it }
-    }
-
-    private fun setToolbarBackgroud() {
-        val headerBackgroundColor = getHeaderBackgroundFromIntent()
-        if(headerBackgroundColor != -1) {
-            layoutBinding.webViewActivityToolbar.setBackgroundColor(headerBackgroundColor)
-        }
-    }
-
     private fun getUrlFromIntent() = intent.getStringExtra(EXTRA_URL)
 
     private fun getTitleFromIntent() = intent.getStringExtra(EXTRA_TITLE)
 
-    private fun getHeaderBackgroundFromIntent() = intent.getIntExtra(EXTRA_HEADER_BACKGROUND, -1)
+    private fun getHeaderBackgroundFromIntent(): Int {
+        val colorResouce = intent.getIntExtra(EXTRA_HEADER_BACKGROUND, -1)
+        return if(colorResouce!=-1) colorResouce else R.color.darkActivityBackground
+    }
 }
