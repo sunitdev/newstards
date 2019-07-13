@@ -5,27 +5,29 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 
-class PackageManager {
+class PackageUtils {
 
-    fun isPackageInstalled(content: Context, packageName: String):Boolean{
-        try {
-            _context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-            return true
-        } catch (e: PackageManager.NameNotFoundException) {
-            return false
+    companion object{
+        fun isPackageInstalled(context: Context, packageName: String):Boolean{
+            try {
+                context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+                return true
+            } catch (e: PackageManager.NameNotFoundException) {
+                return false
+            }
         }
-    }
 
-    fun getPackageIntent(packageName:String, url:String): Intent{
-        val intent = Intent(Intent.ACTION_VIEW)
+        fun getPackageIntent(packageName:String, url:String): Intent{
+            val intent = Intent(Intent.ACTION_VIEW)
 
-        with(intent) {
-            data = Uri.parse(url)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            with(intent) {
+                data = Uri.parse(url)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
-            setPackage(packageName)
+                setPackage(packageName)
 
+            }
+            return intent
         }
-        return intent
     }
 }
