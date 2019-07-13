@@ -13,3 +13,6 @@
 
 /captures
 .externalNativeBuild
+
+# Secrets
+/gradle.properties

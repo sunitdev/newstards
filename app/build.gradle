@@ -21,9 +21,14 @@ android {
         enabled = true
     }
     buildTypes {
+        debug{
+            buildConfigField 'String', "SENTRY_DSN", DEBUG_SENTRY_DSN
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField 'String', "SENTRY_DSN", RELEASE_SENTRY_DSN
         }
     }
 }
@@ -70,4 +75,7 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
     implementation "androidx.paging:paging-rxjava2-ktx:$pagingVersion"
 
+    // sentry
+    def sentryVersion = "1.7.23"
+    implementation "io.sentry:sentry-android:$sentryVersion"
 }

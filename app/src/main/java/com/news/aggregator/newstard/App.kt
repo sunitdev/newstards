@@ -7,6 +7,8 @@ import com.news.aggregator.newstard.di.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
+import io.sentry.Sentry
+import io.sentry.android.AndroidSentryClientFactory
 import javax.inject.Inject
 
 
@@ -24,14 +26,21 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
 
     override fun onCreate() {
         super.onCreate()
-
-        _initDagger()
+        initSentry()
+        initDagger()
     }
 
-    private fun _initDagger() {
+    private fun initDagger() {
         DaggerAppComponent.builder()
             .bindApplication(this)
             .build()
             .inject(this)
+    }
+
+    private fun initSentry(){
+        Sentry.init(
+            BuildConfig.SENTRY_DSN,
+            AndroidSentryClientFactory(applicationContext)
+        );
     }
 }
