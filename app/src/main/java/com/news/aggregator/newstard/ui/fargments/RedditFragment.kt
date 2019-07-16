@@ -54,9 +54,9 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
                 android.R.color.holo_orange_dark, android.R.color.holo_blue_dark)
 
             setOnRefreshListener {
-                isRefreshing = false
-
                 viewModel.reloadData()
+
+                isRefreshing = false
             }
         }
 
@@ -64,6 +64,7 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
     private fun addInitialLoadingStateObserver() {
         viewModel.getInitialLoadingState().observe(this, Observer<NetworkState> {
+
             when (it!!) {
                 NetworkState.LOADING -> {
                     layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
