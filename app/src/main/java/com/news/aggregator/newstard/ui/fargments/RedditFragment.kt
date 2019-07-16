@@ -10,7 +10,6 @@ import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.adapters.reddit.RedditRecyclerAdapter
 import com.news.aggregator.newstard.ui.viewmodels.RedditFragmentViewModel
-import com.news.aggregator.newstard.utils.extensions.observerTillSuccess
 import javax.inject.Inject
 
 class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayoutBinding>() {
@@ -56,6 +55,8 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
             setOnRefreshListener {
                 viewModel.reloadData()
+
+                isRefreshing = false
             }
         }
 
@@ -63,7 +64,7 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
     private fun addInitialLoadingStateObserver() {
 
-        viewModel.getInitialLoadingState().observerTillSuccess(this, Observer {
+        viewModel.getInitialLoadingState().observe(this, Observer {
                 when (it!!) {
                     NetworkState.LOADING -> {
                         layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
@@ -74,7 +75,6 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
                         layoutBinding.redditLayoutProgressBar.visibility = View.GONE
                         layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.VISIBLE
                         layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
-
                     }
                     NetworkState.ERROR -> {
                         layoutBinding.redditLayoutProgressBar.visibility = View.GONE
@@ -87,11 +87,6 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
     private fun addPaginationStateObserver() {
         viewModel.getPaginationLoadingSate().observe(this, Observer<NetworkState> {
-
-            if(layoutBinding.redditLayoutSwipeRefreshLayout.isRefreshing && it != NetworkState.LOADING){
-                layoutBinding.redditLayoutSwipeRefreshLayout.isRefreshing = false
-            }
-
             redditRecyclerAdapter.setPaginationNetworkState(it)
         })
     }
