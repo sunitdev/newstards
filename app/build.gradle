@@ -78,4 +78,8 @@ dependencies {
     // sentry
     def sentryVersion = "1.7.23"
     implementation "io.sentry:sentry-android:$sentryVersion"
+
+    //chrome custom tabs
+    def ctVersion = "23.3.0"
+    implementation "com.android.support:customtabs:$ctVersion"
 }

@@ -2,6 +2,7 @@ package com.news.aggregator.newstard.ui.adapters.reddit.viewholders
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.news.aggregator.newstard.R
@@ -9,6 +10,7 @@ import com.news.aggregator.newstard.databinding.FragmentRedditListItemLayoutBind
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.activities.WebViewActivity
 import com.news.aggregator.newstard.utils.PackageUtils
+import androidx.browser.customtabs.CustomTabsIntent
 
 
 class RedditPostItemViewHolder(
@@ -16,19 +18,23 @@ class RedditPostItemViewHolder(
     private val _context: Context) :
     RecyclerView.ViewHolder(_itemLayoutBinding.root) {
 
-    private val packageName = "com.reddit.frontpage"
+    private val redditPackageName = "com.reddit.frontpage"
 
     fun bindPost(post: RedditPost) {
         _itemLayoutBinding.post = post
         _itemLayoutBinding.root.setOnClickListener {
 
-            val intent: Intent = if (PackageUtils.isPackageInstalled(_context, packageName)) {
-                PackageUtils.getPackageIntent(packageName, post.link)
-            } else {
-                getWebViewIntent(post)
+            if (PackageUtils.isPackageInstalled(_context, redditPackageName)) {
+                val intent = PackageUtils.getPackageIntent(redditPackageName, post.link)
+                _context.startActivity(intent)
             }
-
-            _context.startActivity(intent)
+//            else{
+//                val intent = getWebViewIntent(post)
+//                _context.startActivity(intent)
+//            }
+            else{
+                startCustomTabActivity(_context, post.link)
+            }
         }
     }
 
@@ -47,5 +53,19 @@ class RedditPostItemViewHolder(
         }
 
         return intent
+    }
+
+    private fun startCustomTabActivity(context: Context, url: String) {
+        val builder = CustomTabsIntent.Builder()
+            .setToolbarColor(ContextCompat.getColor(context, R.color.redditSecondaryColor))
+            .addDefaultShareMenuItem()
+            .setShowTitle(true)
+            .setStartAnimations(context, android.R.anim.slide_out_right, android.R.anim.slide_in_left)
+            .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
+        val customTabsIntent = builder.build()
+
+        customTabsIntent.intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        customTabsIntent.launchUrl(context, Uri.parse(url))
     }
 }
