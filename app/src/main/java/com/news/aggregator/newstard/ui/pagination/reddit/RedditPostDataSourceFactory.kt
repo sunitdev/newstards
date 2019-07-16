@@ -7,7 +7,7 @@ import javax.inject.Inject
 class RedditPostDataSourceFactory
     @Inject constructor(val redditPostDataSource: RedditPostDataSource):
         DataSource.Factory<String, RedditPost>() {
-
+    
     override fun create() = redditPostDataSource
 
 }

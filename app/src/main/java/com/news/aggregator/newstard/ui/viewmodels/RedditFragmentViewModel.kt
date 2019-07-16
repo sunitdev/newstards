@@ -40,4 +40,8 @@ class RedditFragmentViewModel
         return redditPostDataSourceFactory.redditPostDataSource.getPaginationLoadStateLiveData()
     }
 
+    fun reloadData() {
+
+    }
+
 }
