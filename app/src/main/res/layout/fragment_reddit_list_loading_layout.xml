@@ -22,17 +22,19 @@
 
             <View
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    app:layout_constraintWidth_percent="0.8"
+                    android:layout_height="12.5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="90dp"
                     android:background="@drawable/reddit_loading_view_rounded_background"/>
 
             <View
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    app:layout_constraintWidth_percent="0.8"
+                    android:layout_height="12.5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="200dp"
                     android:background="@drawable/reddit_loading_view_rounded_background"/>
 
             <View

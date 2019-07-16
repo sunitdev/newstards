@@ -11,7 +11,7 @@
 
     <color name="darkTextForeground">#FFFFFF</color>
 
-    <color name="darkLoadingColor">#B9B9B9</color>
+    <color name="darkLoadingColor">#E6E6E6</color>
 
     <color name="darkIconBarBackground">#FFFFFF</color>
     <color name="darkIconBarIconBackground">#FFFFFF</color>
