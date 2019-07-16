@@ -78,4 +78,9 @@ dependencies {
     // sentry
     def sentryVersion = "1.7.23"
     implementation "io.sentry:sentry-android:$sentryVersion"
+
+    // Shimmer loading effect
+    def shimmerLayoutVersion = "2.1.0"
+    implementation "io.supercharge:shimmerlayout:$shimmerLayoutVersion"
+
 }

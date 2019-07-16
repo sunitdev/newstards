@@ -34,6 +34,16 @@ class RedditRecyclerAdapter @Inject constructor(private val _context: Context) :
                 val post = getItem(position)
                 post?.let { (holder as RedditPostItemViewHolder).bindPost(it) }
             }
+            R.layout.fragment_reddit_list_loading_layout -> {
+                (holder as RedditLoadingViewHolder).startAnimation()
+            }
+        }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+
+        if(holder is RedditLoadingViewHolder){
+            holder.stopAnimation()
         }
     }
 

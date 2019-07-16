@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <LinearLayout android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:gravity="center">
+    <io.supercharge.shimmerlayout.ShimmerLayout
+            android:id="@+id/redditLoadingShimmerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_gravity="center_horizontal"
+            app:shimmer_animation_duration="1200">
 
-        <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="@color/redditColor"/>
 
-    </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+            <View
+                    android:layout_width="match_parent"
+                    app:layout_constraintWidth_percent="0.8"
+                    android:layout_height="12.5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="90dp"
+                    android:background="@drawable/reddit_loading_view_rounded_background"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    app:layout_constraintWidth_percent="0.8"
+                    android:layout_height="12.5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="200dp"
+                    android:background="@drawable/reddit_loading_view_rounded_background"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/redditColor"/>
+
+        </LinearLayout>
+
+    </io.supercharge.shimmerlayout.ShimmerLayout>
 </layout>
