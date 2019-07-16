@@ -10,6 +10,7 @@ import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.adapters.reddit.RedditRecyclerAdapter
 import com.news.aggregator.newstard.ui.viewmodels.RedditFragmentViewModel
+import com.news.aggregator.newstard.utils.extensions.observerTillSuccess
 import javax.inject.Inject
 
 class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayoutBinding>() {
@@ -55,38 +56,42 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
             setOnRefreshListener {
                 viewModel.reloadData()
-
-                isRefreshing = false
             }
         }
 
     }
 
     private fun addInitialLoadingStateObserver() {
-        viewModel.getInitialLoadingState().observe(this, Observer<NetworkState> {
 
-            when (it!!) {
-                NetworkState.LOADING -> {
-                    layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
-                    layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.GONE
-                    layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
+        viewModel.getInitialLoadingState().observerTillSuccess(this, Observer {
+                when (it!!) {
+                    NetworkState.LOADING -> {
+                        layoutBinding.redditLayoutProgressBar.visibility = View.VISIBLE
+                        layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.GONE
+                        layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
+                    }
+                    NetworkState.SUCCESS -> {
+                        layoutBinding.redditLayoutProgressBar.visibility = View.GONE
+                        layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.VISIBLE
+                        layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
+
+                    }
+                    NetworkState.ERROR -> {
+                        layoutBinding.redditLayoutProgressBar.visibility = View.GONE
+                        layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.GONE
+                        layoutBinding.redditLayoutErrorLayout.visibility = View.VISIBLE
+                    }
                 }
-                NetworkState.SUCCESS -> {
-                    layoutBinding.redditLayoutProgressBar.visibility = View.GONE
-                    layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.VISIBLE
-                    layoutBinding.redditLayoutErrorLayout.visibility = View.GONE
-                }
-                NetworkState.ERROR -> {
-                    layoutBinding.redditLayoutProgressBar.visibility = View.GONE
-                    layoutBinding.redditLayoutSwipeRefreshLayout.visibility = View.GONE
-                    layoutBinding.redditLayoutErrorLayout.visibility = View.VISIBLE
-                }
-            }
-        })
+            })
     }
 
     private fun addPaginationStateObserver() {
         viewModel.getPaginationLoadingSate().observe(this, Observer<NetworkState> {
+
+            if(layoutBinding.redditLayoutSwipeRefreshLayout.isRefreshing && it != NetworkState.LOADING){
+                layoutBinding.redditLayoutSwipeRefreshLayout.isRefreshing = false
+            }
+
             redditRecyclerAdapter.setPaginationNetworkState(it)
         })
     }
