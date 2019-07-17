@@ -1,6 +1,8 @@
 package com.news.aggregator.newstard.ui.viewmodels
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -16,6 +18,9 @@ class RedditFragmentViewModel
 
     private var _pagedPostLiveData: LiveData<PagedList<RedditPost>>
 
+    private var _initialLoadingStateLiveData: LiveData<NetworkState>
+    private var _paginationLoadingStateLiveData: LiveData<NetworkState>
+
     init {
         val pageListConfig = PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -23,21 +28,25 @@ class RedditFragmentViewModel
             .build()
 
         _pagedPostLiveData = LivePagedListBuilder(redditPostDataSourceFactory, pageListConfig).build()
+
+        _initialLoadingStateLiveData = Transformations.switchMap(redditPostDataSourceFactory.getDataSourceLiveData(), RedditPostDataSource::getInitialLoadStateLiveData)
+        _paginationLoadingStateLiveData = Transformations.switchMap(redditPostDataSourceFactory.getDataSourceLiveData(), RedditPostDataSource::getPaginationLoadStateLiveData)
     }
 
     override fun onCleared() {
         super.onCleared()
-        redditPostDataSourceFactory.redditPostDataSource.clear()
+
+        redditPostDataSourceFactory.getDataSourceLiveData().value?.clear()
     }
 
     fun getPagedPostData() = _pagedPostLiveData
 
-    fun getInitialLoadingState(): LiveData<NetworkState> {
-        return redditPostDataSourceFactory.redditPostDataSource.getInitialLoadStateLiveData()
-    }
+    fun getInitialLoadingState() = _initialLoadingStateLiveData
 
-    fun getPaginationLoadingSate(): LiveData<NetworkState> {
-        return redditPostDataSourceFactory.redditPostDataSource.getPaginationLoadStateLiveData()
+    fun getPaginationLoadingSate() = _paginationLoadingStateLiveData
+
+    fun reloadData() {
+        redditPostDataSourceFactory.getDataSourceLiveData().value?.invalidate()
     }
 
 }

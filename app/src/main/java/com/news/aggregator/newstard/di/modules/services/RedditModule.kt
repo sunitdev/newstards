@@ -50,8 +50,8 @@ class RedditModule{
 
     @Provides
     @Singleton
-    fun provideRedditDataSourceFactory(redditPostDataSource: RedditPostDataSource): RedditPostDataSourceFactory
-            = RedditPostDataSourceFactory(redditPostDataSource)
+    fun provideRedditDataSourceFactory(redditRepository: RedditRepository): RedditPostDataSourceFactory
+            = RedditPostDataSourceFactory(redditRepository)
 
     @Provides
     fun providerRecycleViewAdapter(application: Application): RedditRecyclerAdapter =
