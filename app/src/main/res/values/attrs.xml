@@ -4,7 +4,10 @@
     <!-- Colors -->
     <attr name="colorActivityBackground" format="reference"/>
 
+    <attr name="colorListLoading" format="reference"/>
+
     <attr name="colorTextForeground" format="reference"/>
+    <attr name="colorTextForegroundSecondary" format="reference"/>
 
     <attr name="colorIconBarBackground" format="reference"/>
     <attr name="colorIconBarIconBackground" format="reference"/>

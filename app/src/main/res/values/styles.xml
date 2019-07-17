@@ -5,7 +5,10 @@
 
         <item name="android:windowBackground">@color/darkActivityBackground</item>
 
+        <item name="colorListLoading">@color/darkListLoadingColor</item>
+
         <item name="colorTextForeground">@color/darkTextForeground</item>
+        <item name="colorTextForegroundSecondary">@color/darkTextSecondaryForeground</item>
 
         <item name="colorIconBarBackground">@color/darkIconBarBackground</item>
         <item name="colorIconBarIconBackground">@color/darkIconBarIconBackground</item>

@@ -60,8 +60,8 @@ class RedditPostItemViewHolder(
             .setToolbarColor(ContextCompat.getColor(context, R.color.redditSecondaryColor))
             .addDefaultShareMenuItem()
             .setShowTitle(true)
-            .setStartAnimations(context, android.R.anim.slide_out_right, android.R.anim.slide_in_left)
-            .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .setStartAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_in_left)
+            .setExitAnimations(context, android.R.anim.slide_out_right, android.R.anim.slide_out_right)
 
         val customTabsIntent = builder.build()
 

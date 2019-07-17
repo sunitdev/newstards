@@ -12,7 +12,7 @@
     <color name="darkTextForeground">#FFFFFF</color>
     <color name="darkTextSecondaryForeground">#FAFAFA</color>
 
-    <color name="darkLoadingColor">#E6E6E6</color>
+    <color name="darkListLoadingColor">#E6E6E6</color>
 
     <color name="darkIconBarBackground">#FFFFFF</color>
     <color name="darkIconBarIconBackground">#FFFFFF</color>

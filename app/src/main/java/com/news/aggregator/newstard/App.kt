@@ -27,7 +27,10 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
     override fun onCreate() {
         super.onCreate()
         initSentry()
+
         initDagger()
+
+        setAppTheme()
     }
 
     private fun initDagger() {
@@ -41,6 +44,10 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
         Sentry.init(
             BuildConfig.SENTRY_DSN,
             AndroidSentryClientFactory(applicationContext)
-        );
+        )
+    }
+
+    private fun setAppTheme() {
+        setTheme(R.style.App_Theme_Dark)
     }
 }
