@@ -24,16 +24,16 @@ class RedditPostItemViewHolder(
         _itemLayoutBinding.post = post
         _itemLayoutBinding.root.setOnClickListener {
 
-            if (PackageUtils.isPackageInstalled(_context, redditPackageName)) {
-                val intent = PackageUtils.getPackageIntent(redditPackageName, post.link)
-                _context.startActivity(intent)
-            }
-//            else{
-//                val intent = getWebViewIntent(post)
-//                _context.startActivity(intent)
-//            }
-            else{
-                startCustomTabActivity(_context, post.link)
+            when {
+                PackageUtils.isPackageInstalled(_context, redditPackageName) -> {
+                    val intent = PackageUtils.getPackageIntent(redditPackageName, post.link)
+                    _context.startActivity(intent)
+                }
+                PackageUtils.isChromeInstalled(_context) -> startCustomTabActivity(_context, post.link)
+                else -> {
+                    val intent = getWebViewIntent(post)
+                    _context.startActivity(intent)
+                }
             }
         }
     }
