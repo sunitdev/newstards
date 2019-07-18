@@ -2,7 +2,6 @@ package com.news.aggregator.newstard
 
 import android.app.Activity
 import android.app.Application
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.news.aggregator.newstard.di.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
@@ -30,8 +29,6 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
         initSentry()
 
         initDagger()
-
-        setAppTheme()
     }
 
     private fun initDagger() {
@@ -48,7 +45,4 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
         )
     }
 
-    private fun setAppTheme() {
-        setTheme(R.style.App_Theme_Light)
-    }
 }

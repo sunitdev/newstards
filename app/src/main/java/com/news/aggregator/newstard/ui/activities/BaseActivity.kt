@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.ui.viewmodels.ViewModelFactory
 import dagger.android.AndroidInjection
 import java.lang.reflect.ParameterizedType
@@ -51,6 +52,8 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
 
         initViewModel()
 
+        setActivityTheme()
+
         initDataBindingLayout()
 
         bindLayoutVariables()
@@ -68,6 +71,10 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
      */
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
+    }
+
+    private fun setActivityTheme() {
+        setTheme(R.style.App_Theme_Dark)
     }
 
     /**
