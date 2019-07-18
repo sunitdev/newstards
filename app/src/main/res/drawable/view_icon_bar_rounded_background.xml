@@ -5,4 +5,7 @@
 
     <corners android:radius="150dp"/>
 
+    <stroke android:width="2dp"
+            android:color="?attr/colorIconBarStroke"/>
+
 </shape>
