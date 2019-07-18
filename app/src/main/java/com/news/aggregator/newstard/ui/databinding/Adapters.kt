@@ -1,6 +1,7 @@
 package com.news.aggregator.newstard.ui.databinding
 
 import android.text.format.DateUtils
+import android.util.TypedValue
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
@@ -41,4 +42,14 @@ fun setHumanizeNumber(view: TextView, value: Long){
     view.text = text
 }
 
+@BindingAdapter("themeTextForeground")
+fun themeTextForeground(textView: TextView, attr: Int){
+    val context = textView.context
 
+    // Get color from attribute
+    val typedValue = TypedValue()
+    context.theme.resolveAttribute(attr, typedValue , true)
+
+    // Set text foreground color
+    textView.setTextColor(typedValue.data)
+}

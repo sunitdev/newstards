@@ -8,7 +8,9 @@ import android.net.Uri
 class PackageUtils {
 
     companion object{
-        val chromePackage = "com.android.chrome"
+        private const val _chromePackageName = "com.android.chrome"
+
+        fun isChromeInstalled(context: Context) = isPackageInstalled(context, _chromePackageName)
 
         fun isPackageInstalled(context: Context, packageName: String):Boolean{
             try {
@@ -32,13 +34,5 @@ class PackageUtils {
             return intent
         }
 
-        fun isChromeInstalled(context: Context):Boolean{
-            try {
-                context.packageManager.getPackageInfo(chromePackage, PackageManager.GET_ACTIVITIES)
-                return true
-            } catch (e: PackageManager.NameNotFoundException) {
-                return false
-            }
-        }
     }
 }

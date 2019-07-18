@@ -27,6 +27,7 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
     override fun onCreate() {
         super.onCreate()
         initSentry()
+
         initDagger()
     }
 
@@ -41,6 +42,7 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
         Sentry.init(
             BuildConfig.SENTRY_DSN,
             AndroidSentryClientFactory(applicationContext)
-        );
+        )
     }
+
 }
