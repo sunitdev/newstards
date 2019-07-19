@@ -1,5 +1,6 @@
 package com.news.aggregator.newstard.ui.activities
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,12 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
         handleOnCreate()
     }
 
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        theme.applyStyle(R.style.App_Theme_Dark, true)
+        return theme
+    }
+
     /**
      * Handle onCreate callback
      */
@@ -51,8 +58,6 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
         configureDagger()
 
         initViewModel()
-
-        setActivityTheme()
 
         initDataBindingLayout()
 
@@ -71,10 +76,6 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
      */
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
-    }
-
-    private fun setActivityTheme() {
-        setTheme(R.style.App_Theme_Dark)
     }
 
     /**

@@ -10,11 +10,9 @@ import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.ui.adapters.reddit.RedditRecyclerAdapter
 import com.news.aggregator.newstard.ui.viewmodels.RedditFragmentViewModel
-import javax.inject.Inject
 
 class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayoutBinding>() {
 
-    @Inject
     lateinit var redditRecyclerAdapter: RedditRecyclerAdapter
 
     override fun getLayoutResource(): Int {
@@ -24,6 +22,8 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
     override fun bindLayoutVariables() {
         super.bindLayoutVariables()
 
+        initRecyclerAdapter()
+
         initRecyclerView()
 
         initSwipeRefreshLayout()
@@ -32,6 +32,10 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
         addPaginationStateObserver()
 
+    }
+
+    private fun initRecyclerAdapter() {
+        redditRecyclerAdapter = RedditRecyclerAdapter(context!!)
     }
 
     private fun initRecyclerView() {

@@ -53,7 +53,4 @@ class RedditModule{
     fun provideRedditDataSourceFactory(redditRepository: RedditRepository): RedditPostDataSourceFactory
             = RedditPostDataSourceFactory(redditRepository)
 
-    @Provides
-    fun providerRecycleViewAdapter(application: Application): RedditRecyclerAdapter =
-        RedditRecyclerAdapter(application)
 }
