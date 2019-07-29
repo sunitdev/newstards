@@ -18,6 +18,8 @@
     <color name="darkIconBarIconBackground">#FFFFFF</color>
     <color name="darkIconBarIconShadow">#E6E6E6</color>
     <color name="darkIconBarStroke">#C8C8C8</color>
+
+    <color name="darkIconButtonBackground">@android:color/transparent</color>
     <!-- /Dark Theme -->
 
 
@@ -33,5 +35,7 @@
     <color name="lightIconBarIconBackground">#FFFFFF</color>
     <color name="lightIconBarIconShadow">#C8C8C8</color>
     <color name="lightIconBarStroke">#C8C8C8</color>
+
+    <color name="lightIconButtonBackground">@android:color/transparent</color>
     <!-- /Light Theme -->
 </resources>

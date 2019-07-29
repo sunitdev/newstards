@@ -14,6 +14,10 @@
         <item name="colorIconBarIconBackground">@color/darkIconBarIconBackground</item>
         <item name="colorIconBarIconShadow">@color/darkIconBarIconShadow</item>
         <item name="colorIconBarStroke">@color/darkIconBarStroke</item>
+
+        <item name="colorIconButtonBackground">@color/darkIconButtonBackground</item>
+
+        <item name="drawableSettingIcon">@drawable/dark_settings_icon</item>
     </style>
     <!-- /Dark Application Theme. -->
 
@@ -32,6 +36,10 @@
         <item name="colorIconBarIconBackground">@color/lightIconBarIconBackground</item>
         <item name="colorIconBarIconShadow">@color/lightIconBarIconShadow</item>
         <item name="colorIconBarStroke">@color/lightIconBarStroke</item>
+
+        <item name="colorIconButtonBackground">@color/lightIconButtonBackground</item>
+
+        <item name="drawableSettingIcon">@drawable/light_setting_icon</item>
     </style>
     <!-- /Light Application Theme. -->
 
