@@ -1,5 +1,7 @@
 package com.news.aggregator.newstard.di.modules
 
+import com.news.aggregator.newstard.repositories.preferences.PreferenceRepository
+import com.news.aggregator.newstard.repositories.preferences.PreferenceRepositoryImp
 import com.news.aggregator.newstard.repositories.services.ServiceRepository
 import com.news.aggregator.newstard.repositories.services.ServiceRepositoryImp
 import dagger.Module
@@ -15,4 +17,9 @@ class AppModule {
         return ServiceRepositoryImp()
     }
 
+    @Provides
+    @Singleton
+    fun providesPreferenceRepository(): PreferenceRepository {
+        return PreferenceRepositoryImp()
+    }
 }

@@ -3,6 +3,7 @@ package com.news.aggregator.newstard
 import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
+import com.chibatching.kotpref.Kotpref
 import com.news.aggregator.newstard.di.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -26,9 +27,12 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
 
     override fun onCreate() {
         super.onCreate()
+
         initSentry()
 
         initDagger()
+
+        initKotPref()
     }
 
     private fun initDagger() {
@@ -43,6 +47,10 @@ class App: Application() , HasActivityInjector, HasSupportFragmentInjector  {
             BuildConfig.SENTRY_DSN,
             AndroidSentryClientFactory(applicationContext)
         )
+    }
+
+    private fun initKotPref(){
+        Kotpref.init(this)
     }
 
 }

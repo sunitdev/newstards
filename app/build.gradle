@@ -86,4 +86,8 @@ dependencies {
     //chrome custom tabs
     def ctVersion = "23.3.0"
     implementation "com.android.support:customtabs:$ctVersion"
+
+    // Kotlin Preference
+    def kotPrefVersion = "2.8.0"
+    implementation "com.chibatching.kotpref:kotpref:$kotPrefVersion"
 }

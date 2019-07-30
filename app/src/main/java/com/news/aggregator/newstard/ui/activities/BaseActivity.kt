@@ -47,7 +47,7 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
 
     override fun getTheme(): Resources.Theme {
         val theme = super.getTheme()
-        theme.applyStyle(R.style.App_Theme_Dark, true)
+        theme.applyStyle(R.style.App_Theme_Light, true)
         return theme
     }
 
