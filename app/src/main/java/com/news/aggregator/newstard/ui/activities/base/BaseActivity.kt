@@ -1,4 +1,4 @@
-package com.news.aggregator.newstard.ui.activities
+package com.news.aggregator.newstard.ui.activities.base
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -54,7 +54,7 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     /**
      * Handle onCreate callback
      */
-    private fun handleOnCreate(){
+    open fun handleOnCreate(){
         configureDagger()
 
         initViewModel()

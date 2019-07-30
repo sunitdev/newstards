@@ -24,8 +24,12 @@
         </activity>
 
         <!-- WebView Activity -->
-        <activity
-                android:name=".ui.activities.WebViewActivity"/>
+        <activity android:name=".ui.activities.WebViewActivity"/>
+        <!-- Webview Activity -->
+
+        <!-- Settings Activity -->
+        <activity android:name=".ui.activities.SettingsActivity"/>
+        <!-- /Settings Activity -->
     </application>
 
 </manifest>

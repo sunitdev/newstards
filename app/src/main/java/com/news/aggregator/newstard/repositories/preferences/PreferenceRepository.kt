@@ -1,14 +1,14 @@
 package com.news.aggregator.newstard.repositories.preferences
 
-import com.news.aggregator.newstard.services.preferences.AppPerference
+import com.news.aggregator.newstard.services.preferences.AppPreference
 
 interface PreferenceRepository {
-    fun getAppPreference(): AppPerference
+    fun getAppPreference(): AppPreference
 }
 
 class PreferenceRepositoryImp: PreferenceRepository {
 
-    override fun getAppPreference(): AppPerference {
-        return AppPerference
+    override fun getAppPreference(): AppPreference {
+        return AppPreference
     }
 }
