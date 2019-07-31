@@ -33,7 +33,7 @@
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
                     android:background="@drawable/rounded_image_button_background"
-                    app:themeImageSrc="@{R.attr.drawableSettingIcon}"/>
+                    android:src="@drawable/setting_icon"/>
 
             <com.news.aggregator.newstard.ui.views.iconbarview.IconBarView
                     android:id="@+id/mainActivityIconBar"

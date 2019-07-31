@@ -3,6 +3,8 @@ package com.news.aggregator.newstard.ui.activities
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.Window
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.ActivitySettingsBinding
@@ -51,7 +53,32 @@ class SettingsActivity: BaseActivity<SettingsActivityViewModel, ActivitySettings
     class MainPreferenceFragment: PreferenceFragmentCompat() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setupPreferenceResource(rootKey)
+
+            setupEventHandlers()
+        }
+
+        private fun setupPreferenceResource(rootKey: String?){
+            preferenceManager.sharedPreferencesName = getString(R.string.preference_app_filename)
+
             setPreferencesFromResource(R.xml.pref_app, rootKey)
+        }
+
+        private fun setupEventHandlers(){
+
+            // Dark theme settings
+            findPreference(getString(R.string.preference_app_key_is_dark_theme))
+                .setOnPreferenceChangeListener { _, newValue ->
+                    if(newValue as Boolean){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    }else{
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
+
+                    (activity as AppCompatActivity).delegate.applyDayNight()
+
+                    true
+                }
         }
     }
 }

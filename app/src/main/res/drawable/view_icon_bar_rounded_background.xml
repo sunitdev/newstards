@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="?attr/colorIconBarBackground"/>
+    <solid android:color="@color/iconBarBackground"/>
 
     <corners android:radius="150dp"/>
 
     <stroke android:width="2dp"
-            android:color="?attr/colorIconBarStroke"/>
+            android:color="@color/iconBarStroke"/>
 
 </shape>

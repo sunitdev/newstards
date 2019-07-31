@@ -69,6 +69,6 @@ class WebViewActivity : AppCompatActivity(){
 
     private fun getHeaderBackgroundFromIntent(): Int {
         val colorResouce = intent.getIntExtra(EXTRA_HEADER_BACKGROUND, -1)
-        return if(colorResouce!=-1) colorResouce else R.color.darkActivityBackground
+        return if(colorResouce!=-1) colorResouce else R.color.activityBackground
     }
 }
