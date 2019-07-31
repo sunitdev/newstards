@@ -82,10 +82,6 @@ dependencies {
     def sentryVersion = "1.7.23"
     implementation "io.sentry:sentry-android:$sentryVersion"
 
-    // Shimmer loading effect
-    def shimmerLayoutVersion = "2.1.0"
-    implementation "io.supercharge:shimmerlayout:$shimmerLayoutVersion"
-
     //chrome custom tabs
     def ctVersion = "23.3.0"
     implementation "com.android.support:customtabs:$ctVersion"
