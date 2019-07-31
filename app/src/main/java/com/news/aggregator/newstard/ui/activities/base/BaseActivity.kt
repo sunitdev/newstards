@@ -1,14 +1,14 @@
-package com.news.aggregator.newstard.ui.activities
+package com.news.aggregator.newstard.ui.activities.base
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.news.aggregator.newstard.R
+import com.news.aggregator.newstard.services.preferences.AppPreference
 import com.news.aggregator.newstard.ui.viewmodels.ViewModelFactory
 import dagger.android.AndroidInjection
 import java.lang.reflect.ParameterizedType
@@ -45,19 +45,15 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
         handleOnCreate()
     }
 
-    override fun getTheme(): Resources.Theme {
-        val theme = super.getTheme()
-        theme.applyStyle(R.style.App_Theme_Dark, true)
-        return theme
-    }
-
     /**
      * Handle onCreate callback
      */
-    private fun handleOnCreate(){
+    open fun handleOnCreate(){
         configureDagger()
 
         initViewModel()
+
+        applyDayNightMode()
 
         initDataBindingLayout()
 
@@ -77,6 +73,16 @@ abstract class BaseActivity<ViewModelClass: ViewModel, DataBindingClass: ViewDat
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModelClass())
     }
+
+    private fun applyDayNightMode(){
+
+        val defaultNightMode = if(AppPreference.isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+
+        AppCompatDelegate.setDefaultNightMode(defaultNightMode)
+
+        delegate.applyDayNight()
+    }
+
 
     /**
      * Get viewmodel class from generic instance

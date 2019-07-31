@@ -5,6 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.news.aggregator.newstard.R"/>
+
         <variable
                 name="services"
                 type="java.util.List&lt;com.news.aggregator.newstard.repositories.services.NewsService&gt;"/>
@@ -16,12 +18,30 @@
             android:orientation="vertical"
             tools:context=".ui.activities.MainActivity">
 
-        <com.news.aggregator.newstard.ui.views.iconbarview.IconBarView
-                android:id="@+id/mainActivityIconBar"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:services="@{services}"/>
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:id="@+id/mainActivityButtonSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/rounded_image_button_background"
+                    android:src="@drawable/setting_icon"/>
+
+            <com.news.aggregator.newstard.ui.views.iconbarview.IconBarView
+                    android:id="@+id/mainActivityIconBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:services="@{services}"/>
+        </LinearLayout>
 
         <androidx.viewpager.widget.ViewPager
                 android:id="@+id/mainActivityViewPage"

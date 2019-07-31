@@ -1,38 +1,9 @@
 <resources>
 
     <!-- Dark Application Theme. -->
-    <style name="App.Theme.Dark" parent="Theme.AppCompat.Light.NoActionBar">
-
-        <item name="android:windowBackground">@color/darkActivityBackground</item>
-
-        <item name="colorListLoading">@color/darkListLoadingColor</item>
-
-        <item name="colorTextForeground">@color/darkTextForeground</item>
-        <item name="colorTextForegroundSecondary">@color/darkTextSecondaryForeground</item>
-
-        <item name="colorIconBarBackground">@color/darkIconBarBackground</item>
-        <item name="colorIconBarIconBackground">@color/darkIconBarIconBackground</item>
-        <item name="colorIconBarIconShadow">@color/darkIconBarIconShadow</item>
-        <item name="colorIconBarStroke">@color/darkIconBarStroke</item>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/activityBackground</item>
     </style>
     <!-- /Dark Application Theme. -->
-
-
-    <!-- Light Application Theme. -->
-    <style name="App.Theme.Light" parent="Theme.AppCompat.Light.NoActionBar">
-
-        <item name="android:windowBackground">@color/lightActivityBackground</item>
-
-        <item name="colorListLoading">@color/lightListLoadingColor</item>
-
-        <item name="colorTextForeground">@color/lightTextForeground</item>
-        <item name="colorTextForegroundSecondary">@color/lightTextSecondaryForeground</item>
-
-        <item name="colorIconBarBackground">@color/lightIconBarBackground</item>
-        <item name="colorIconBarIconBackground">@color/lightIconBarIconBackground</item>
-        <item name="colorIconBarIconShadow">@color/lightIconBarIconShadow</item>
-        <item name="colorIconBarStroke">@color/lightIconBarStroke</item>
-    </style>
-    <!-- /Light Application Theme. -->
 
 </resources>

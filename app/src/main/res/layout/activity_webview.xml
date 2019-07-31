@@ -40,7 +40,7 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:themeTextForeground="@{R.attr.colorTextForeground}"
+                        android:textColor="@color/textForeground"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:textSize="15sp"

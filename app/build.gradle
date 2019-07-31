@@ -16,6 +16,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Add app version in string xml resource
+        resValue "string", "app_version", versionName
     }
     dataBinding {
         enabled = true
@@ -86,4 +89,14 @@ dependencies {
     //chrome custom tabs
     def ctVersion = "23.3.0"
     implementation "com.android.support:customtabs:$ctVersion"
+
+    // Kotlin Preference
+    def kotPrefVersion = "2.8.0"
+    implementation "com.chibatching.kotpref:kotpref:$kotPrefVersion"
+
+    // Preference Activity
+    def preferenceVersion = "1.0.0"
+    implementation "androidx.preference:preference:$preferenceVersion"
+
+    implementation 'com.android.support:cardview-v7:28.0.0'
 }
