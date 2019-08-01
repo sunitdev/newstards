@@ -15,7 +15,7 @@
     <string name="preference_category_about">About</string>
 
     <string name="preference_app_key_is_dark_theme" translatable="false">is_dark_theme</string>
-    <string name="preference_app_title_is_dark_theme">Use Dark Theme</string>
+    <string name="preference_app_title_is_dark_theme">Dark Theme</string>
     <string name="preference_app_summary_on_is_dark_theme">Disable dark theme for the app</string>
     <string name="preference_app_summary_off_is_dark_theme">Enable dark theme for the app</string>
 
