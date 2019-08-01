@@ -5,20 +5,17 @@
     <PreferenceCategory
             android:title="@string/preference_category_general">
 
-        <CheckBoxPreference
+        <SwitchPreference
                 android:defaultValue="false"
                 android:key="@string/preference_app_key_is_dark_theme"
                 android:title="@string/preference_app_title_is_dark_theme"
-                android:summaryOn="@string/preference_app_summary_on_is_dark_theme"
-                android:summaryOff="@string/preference_app_summary_off_is_dark_theme"/>
+                android:switchTextOn="@string/preference_app_summary_on_is_dark_theme"
+                android:switchTextOff="@string/preference_app_summary_off_is_dark_theme"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
             android:title="@string/preference_category_about">
-
-        <Preference
-            android:selectable="false"
-            android:summary="@string/preference_app_summary_about"/>
 
         <Preference
             android:selectable="false"
