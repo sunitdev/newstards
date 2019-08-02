@@ -16,10 +16,13 @@ class RedditServiceImpl
         RedditService {
 
     override fun fetchPosts(limit: Int, afterID: String?) : Observable<List<RedditPost>> {
-        return _redditApiService.getPostList(limit, afterID ).map(this::convertApiToModel)
+        return _redditApiService.getPostList(limit, afterID ).map(this::convertResponseToModel)
     }
 
-    private fun convertApiToModel(class_object : ResponseData): List<RedditPost>{
+    /**
+     * Convert response to repository model
+     */
+    private fun convertResponseToModel(class_object : ResponseData): List<RedditPost>{
 
         return class_object.data.children.map {
             RedditPost(id=it.data.name,
@@ -31,9 +34,11 @@ class RedditServiceImpl
         }
     }
 
+    /**
+     * Convert UTC timestamp in seconds to calender instance
+     */
     private fun convertCreatedAtToLocal(utcTimeStamp: Long): Calendar {
         val dateTime = Calendar.getInstance()
-        // API returns timestamp in seconds.
         dateTime.timeInMillis = utcTimeStamp * 1000L
         return dateTime
     }

@@ -1,8 +1,7 @@
 package com.news.aggregator.newstard.repositories.reddit
 
-import io.reactivex.Observable
-
 import com.news.aggregator.newstard.services.apis.reddit.RedditService
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -16,8 +15,7 @@ interface RedditRepository{
 
 
 class RedditRepositoryImpl
-    @Inject constructor(private val _redditService: RedditService):
-        RedditRepository{
+    @Inject constructor(private val _redditService: RedditService): RedditRepository{
 
     /**
      * Returns all reddit posts
