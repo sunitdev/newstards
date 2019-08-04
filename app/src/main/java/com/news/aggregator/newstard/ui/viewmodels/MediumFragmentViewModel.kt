@@ -41,4 +41,10 @@ class MediumFragmentViewModel
         _mediumPostDataSourceFactory.getDataSourceLiveData().value?.invalidate()
     }
 
+    override fun onCleared() {
+        super.onCleared()
+
+        _mediumPostDataSourceFactory.getDataSourceLiveData().value?.clear()
+    }
+
 }
