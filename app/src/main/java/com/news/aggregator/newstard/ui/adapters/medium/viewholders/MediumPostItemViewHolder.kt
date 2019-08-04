@@ -25,7 +25,9 @@ class MediumPostItemViewHolder(
 
             when {
                 PackageUtils.isPackageInstalled(_context, mediumPackageName) -> {
-                    val intent = PackageUtils.getPackageIntent(mediumPackageName, post.link)
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data=Uri.parse(post.link)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     _context.startActivity(intent)
                 }
                 PackageUtils.isChromeInstalled(_context) -> startCustomTabActivity(_context, post.link)
