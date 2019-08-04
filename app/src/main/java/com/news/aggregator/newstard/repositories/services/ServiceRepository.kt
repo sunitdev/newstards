@@ -11,7 +11,8 @@ class ServiceRepositoryImp: ServiceRepository {
 
     // Constant services list
     private val _services = listOf(
-        NewsService(1, "Reddit", R.drawable.reddit_icon)
+        NewsService(1, "Reddit", R.drawable.reddit_icon),
+        NewsService(2, "Medium", R.drawable.medium_icon)
     )
 
     /**

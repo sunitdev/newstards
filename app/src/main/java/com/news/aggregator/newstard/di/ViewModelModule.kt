@@ -2,10 +2,7 @@ package com.news.aggregator.newstard.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.news.aggregator.newstard.ui.viewmodels.MainActivityViewModel
-import com.news.aggregator.newstard.ui.viewmodels.RedditFragmentViewModel
-import com.news.aggregator.newstard.ui.viewmodels.SettingsActivityViewModel
-import com.news.aggregator.newstard.ui.viewmodels.ViewModelFactory
+import com.news.aggregator.newstard.ui.viewmodels.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -26,12 +23,17 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(SettingsActivityViewModel::class)
+    internal abstract fun bindSettingsActivityViewModel(settingsActivityViewModel: SettingsActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(RedditFragmentViewModel::class)
     internal abstract fun bindRedditFragmentViewModel(redditFragmentViewModel: RedditFragmentViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(SettingsActivityViewModel::class)
-    internal abstract fun bindSettingsActivityViewModel(settingsActivityViewModel: SettingsActivityViewModel): ViewModel
+    @ViewModelKey(MediumFragmentViewModel::class)
+    internal abstract fun bindMediumFragmentViewModel(mediumFragmentViewModel: MediumFragmentViewModel): ViewModel
 
 }

@@ -24,6 +24,7 @@
                 android:background="@drawable/view_icon_bar_rounded_background"/>
 
         <HorizontalScrollView
+                android:id="@+id/viewIconBarImageIconScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
@@ -38,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:animateLayoutChanges="true"
+                    android:gravity="center"
                     android:orientation="horizontal"/>
 
         </HorizontalScrollView>
