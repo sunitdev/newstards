@@ -3,12 +3,14 @@ package com.news.aggregator.newstard.ui.views.iconbarview
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.repositories.services.NewsService
+import com.news.aggregator.newstard.utils.extensions.scrollXToViewCenter
 
 class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayout(context, attributeSet) {
 
@@ -36,19 +38,46 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
             container.findViewById<ImageButton>(it.id)?.let { imageButton -> scaleDownImageButton(imageButton)  }
         }
 
-        // If value is not null and View with same id exists then scale up
-        value?.let {
-            container.findViewById<ImageButton>(it.id)?.let { imageButton -> scaleUpImageButton(imageButton)  }
+        // If value is not null and View with same id exists then scale up and scroll
+        value?.let { newsService ->
+            container.findViewById<ImageButton>(newsService.id)?.let {
+                    scaleUpImageButton(it)
+                    findViewById<HorizontalScrollView>(R.id.viewIconBarImageIconScrollView).scrollXToViewCenter(it)
+            }
         }
 
         field = value
     }
 
     // Private variables
+    private val _serviceClickEventHandler: ArrayList<ServiceIconClickListener> = ArrayList()
+
+
     private val _iconButtonWidth = 30f.toDP()
     private val _iconButtonHeight = 30f.toDP()
     private val _activeIconButtonWidth = 50f.toDP()
     private val _activeIconButtonHeight = 50f.toDP()
+
+
+    // Public apis
+
+    /**
+     * Add listener for icon click listener
+     */
+    fun setOnServiceIconClickListener(listener: ServiceIconClickListener){
+        _serviceClickEventHandler.add(listener)
+    }
+
+    /**
+     * Add listener for icon click listener via lambda expression
+     */
+    fun setOnServiceIconClickListener(wrapper: (service: NewsService) -> Unit) {
+
+        _serviceClickEventHandler.add(object: ServiceIconClickListener{
+            override fun onServiceIconClicked(service: NewsService) = wrapper(service)
+        })
+
+    }
 
 
     /**
@@ -66,11 +95,15 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
 
         val imageButton = ImageButton(context)
 
+        val linearLayoutparams = LinearLayout.LayoutParams(_iconButtonWidth, _iconButtonHeight)
+        linearLayoutparams.setMargins(5F.toDP(), 0, 5F.toDP(), 0)
+
         with(imageButton) {
             id = service.id
-            layoutParams = LinearLayout.LayoutParams(_iconButtonWidth, _iconButtonHeight)
+            layoutParams = linearLayoutparams
             scaleType = ImageView.ScaleType.FIT_XY
             adjustViewBounds = true
+
 
             setBackgroundResource(R.drawable.view_icon_bar_icon_button_background)
             setImageResource(service.icon)
@@ -91,6 +124,11 @@ class IconBarView(context: Context, attributeSet: AttributeSet): ConstraintLayou
     }
 
     private fun handleImageButtonClicked(view: ImageButton, service: NewsService) {
+        // Updated selected service
+        selectedNewsService = service
+
+        // Call all listener
+        _serviceClickEventHandler.map { it.onServiceIconClicked(service) }
     }
 
     /**

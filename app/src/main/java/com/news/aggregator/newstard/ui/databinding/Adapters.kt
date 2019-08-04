@@ -1,6 +1,7 @@
 package com.news.aggregator.newstard.ui.databinding
 
 import android.text.format.DateUtils
+import android.util.Log
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat

@@ -7,8 +7,6 @@
 
         <import type="com.news.aggregator.newstard.ui.databinding.AdaptersKt"/>
 
-        <import type="com.news.aggregator.newstard.R"/>
-
         <variable
                 name="post"
                 type="com.news.aggregator.newstard.repositories.reddit.RedditPost"/>

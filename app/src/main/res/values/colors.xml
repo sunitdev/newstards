@@ -3,7 +3,10 @@
 
     <!-- Common Colors -->
     <color name="redditColor">#FF4500</color>
-    <color name="redditSecondaryColor">#0079D3</color>
+    <color name="redditWebviewColor">#0079D3</color>
+
+    <color name="mediumColor">#00AB6C</color>
+    <color name="mediumWebviewColor">#252525</color>
     <!-- Common Color -->
 
     <color name="activityBackground">#FAFAFA</color>

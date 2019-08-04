@@ -1,32 +1,31 @@
-package com.news.aggregator.newstard.ui.adapters.reddit.viewholders
+package com.news.aggregator.newstard.ui.adapters.medium.viewholders
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.news.aggregator.newstard.R
-import com.news.aggregator.newstard.databinding.FragmentRedditListItemLayoutBinding
-import com.news.aggregator.newstard.repositories.reddit.RedditPost
+import com.news.aggregator.newstard.databinding.FragmentMediumListItemLayoutBinding
+import com.news.aggregator.newstard.repositories.medium.MediumPost
 import com.news.aggregator.newstard.ui.activities.WebViewActivity
 import com.news.aggregator.newstard.utils.PackageUtils
-import androidx.browser.customtabs.CustomTabsIntent
 
+class MediumPostItemViewHolder(
+    private val _layoutBinding: FragmentMediumListItemLayoutBinding,
+    private val _context: Context):RecyclerView.ViewHolder(_layoutBinding.root){
 
-class RedditPostItemViewHolder(
-    private val _itemLayoutBinding: FragmentRedditListItemLayoutBinding,
-    private val _context: Context) :
-    RecyclerView.ViewHolder(_itemLayoutBinding.root) {
+    private val mediumPackageName = "com.medium.reader"
 
-    private val redditPackageName = "com.reddit.frontpage"
+    fun bindPost(post: MediumPost){
+        _layoutBinding.post = post
 
-    fun bindPost(post: RedditPost) {
-        _itemLayoutBinding.post = post
-        _itemLayoutBinding.root.setOnClickListener {
+        _layoutBinding.root.setOnClickListener {
 
             when {
-                PackageUtils.isPackageInstalled(_context, redditPackageName) -> {
-                    val intent = PackageUtils.getPackageIntent(redditPackageName, post.link)
+                PackageUtils.isPackageInstalled(_context, mediumPackageName) -> {
+                    val intent = PackageUtils.getPackageIntent(mediumPackageName, post.link)
                     _context.startActivity(intent)
                 }
                 PackageUtils.isChromeInstalled(_context) -> startCustomTabActivity(_context, post.link)
@@ -38,7 +37,7 @@ class RedditPostItemViewHolder(
         }
     }
 
-    private fun getWebViewIntent(post: RedditPost): Intent {
+    private fun getWebViewIntent(post: MediumPost): Intent {
         val intent = Intent(_context, WebViewActivity::class.java)
 
         with(intent) {
@@ -48,7 +47,7 @@ class RedditPostItemViewHolder(
             putExtra(WebViewActivity.EXTRA_TITLE, post.title)
             putExtra(
                 WebViewActivity.EXTRA_HEADER_BACKGROUND,
-                ContextCompat.getColor(_context, R.color.redditWebviewColor)
+                ContextCompat.getColor(_context, R.color.mediumWebviewColor)
             )
         }
 
@@ -57,7 +56,7 @@ class RedditPostItemViewHolder(
 
     private fun startCustomTabActivity(context: Context, url: String) {
         val builder = CustomTabsIntent.Builder()
-            .setToolbarColor(ContextCompat.getColor(context, R.color.redditWebviewColor))
+            .setToolbarColor(ContextCompat.getColor(context, R.color.mediumWebviewColor))
             .addDefaultShareMenuItem()
             .setShowTitle(true)
             .setStartAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_in_left)

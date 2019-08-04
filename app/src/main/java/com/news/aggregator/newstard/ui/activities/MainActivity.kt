@@ -2,24 +2,19 @@ package com.news.aggregator.newstard.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.viewpager.widget.ViewPager
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.ActivityMainBinding
+import com.news.aggregator.newstard.repositories.services.NewsService
 import com.news.aggregator.newstard.ui.activities.base.BaseActivity
 import com.news.aggregator.newstard.ui.adapters.MainActivityFragmentAdapter
 import com.news.aggregator.newstard.ui.viewmodels.MainActivityViewModel
-import com.news.aggregator.newstard.ui.views.iconbarview.IconBarView
 
 class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() {
 
     private var _lastDayNightMode = AppCompatDelegate.getDefaultNightMode()
 
     override fun getLayoutResource() = R.layout.activity_main
-
-    override fun bindLayoutVariables() {
-        super.bindLayoutVariables()
-
-        layoutBinding.services = viewModel.getServices()
-    }
 
     override fun handleOnCreate() {
         super.handleOnCreate()
@@ -29,6 +24,12 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         setUpIconBar()
 
         setUpEventHandlers()
+    }
+
+    override fun bindLayoutVariables() {
+        super.bindLayoutVariables()
+
+        layoutBinding.services = viewModel.getServices()
     }
 
     override fun onRestart() {
@@ -42,12 +43,23 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 
     private fun setupViewPager(){
         layoutBinding.mainActivityViewPage.adapter = MainActivityFragmentAdapter(supportFragmentManager)
+
+        layoutBinding.mainActivityViewPage.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                layoutBinding.mainActivityIconBar.selectedNewsService = viewModel.getServices()[position]
+            }
+        })
     }
 
     private fun setUpIconBar(){
         // Set selected icon for iconbar
-        // TODO: Replace this with adapter
-        findViewById<IconBarView>(R.id.mainActivityIconBar).selectedNewsService = viewModel.getServices()[0]
+        layoutBinding.mainActivityIconBar.selectedNewsService = viewModel.getServices()[0]
+
+        layoutBinding.mainActivityIconBar.setOnServiceIconClickListener{handelOnServiceIconClicked(it)}
+
     }
 
     private fun setUpEventHandlers(){
@@ -56,7 +68,10 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
         layoutBinding.mainActivityButtonSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
+    }
 
+    private fun handelOnServiceIconClicked(service: NewsService){
+        layoutBinding.mainActivityViewPage.currentItem = service.id - 1
     }
 
 }

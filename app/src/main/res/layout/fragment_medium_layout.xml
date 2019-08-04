@@ -12,34 +12,33 @@
             android:gravity="center">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/redditLayoutSwipeRefreshLayout"
+                android:id="@+id/mediumLayoutSwipeRefreshLayout"
                 android:layout_width="match_parent"
-               android:layout_height="match_parent">
+                android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/redditLayoutRecyclerView"
+                    android:id="@+id/mediumLayoutRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="vertical"/>
 
-
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
-                android:id="@+id/redditLayoutProgressBar"
+                android:id="@+id/mediumLayoutProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminateTint="@color/redditColor"/>
+                android:indeterminateTint="@color/mediumColor"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/redditLayoutErrorLayout"
+                android:id="@+id/mediumLayoutErrorLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp">
 
 
             <TextView
-                    android:id="@+id/redditLayoutErrorTextOhNO"
+                    android:id="@+id/mediumLayoutErrorTextOhNO"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -54,7 +53,7 @@
                     android:layout_height="200dp"
                     android:src="@drawable/network_error_icon"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/redditLayoutErrorTextOhNO"
+                    app:layout_constraintBottom_toTopOf="@id/mediumLayoutErrorTextOhNO"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
 
@@ -66,7 +65,7 @@
                       android:text="No Internet found. Check your connection. "
                       android:layout_marginTop="20dp"
                       app:layout_constraintRight_toLeftOf="parent"
-                      app:layout_constraintTop_toBottomOf="@id/redditLayoutErrorTextOhNO"/>
+                      app:layout_constraintTop_toBottomOf="@id/mediumLayoutErrorTextOhNO"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

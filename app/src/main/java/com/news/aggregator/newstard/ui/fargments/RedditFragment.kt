@@ -15,9 +15,7 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
     lateinit var redditRecyclerAdapter: RedditRecyclerAdapter
 
-    override fun getLayoutResource(): Int {
-        return R.layout.fragment_reddit_layout
-    }
+    override fun getLayoutResource() = R.layout.fragment_reddit_layout
 
     override fun bindLayoutVariables() {
         super.bindLayoutVariables()
@@ -54,8 +52,7 @@ class RedditFragment : BaseFragment<RedditFragmentViewModel, FragmentRedditLayou
 
     private fun initSwipeRefreshLayout() {
         with(layoutBinding.redditLayoutSwipeRefreshLayout){
-            setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_green_dark,
-                android.R.color.holo_orange_dark, android.R.color.holo_blue_dark)
+            setColorSchemeResources(R.color.redditColor)
 
             setOnRefreshListener {
                 viewModel.reloadData()

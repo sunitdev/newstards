@@ -4,6 +4,8 @@ import com.google.gson.GsonBuilder
 import com.news.aggregator.newstard.repositories.medium.MediumRepository
 import com.news.aggregator.newstard.repositories.medium.MediumRepositoryImp
 import com.news.aggregator.newstard.services.apis.medium.*
+import com.news.aggregator.newstard.ui.pagination.medium.MediumPostDataSource
+import com.news.aggregator.newstard.ui.pagination.medium.MediumPostDataSourceFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -46,5 +48,19 @@ class MediumModule {
     @Provides
     @Singleton
     fun provideMediumRepository(mediumService: MediumService): MediumRepository = MediumRepositoryImp(mediumService)
+
+    /**
+     * Provider for medium data source
+     */
+    @Provides
+    @Singleton
+    fun provideMediumDataSource(mediumRepository: MediumRepository): MediumPostDataSource = MediumPostDataSource(mediumRepository)
+
+    /**
+     * Provider for medium data source factory
+     */
+    @Provides
+    @Singleton
+    fun providesMediumDataSouceFactory(mediumRepository: MediumRepository): MediumPostDataSourceFactory = MediumPostDataSourceFactory(mediumRepository)
 
 }
