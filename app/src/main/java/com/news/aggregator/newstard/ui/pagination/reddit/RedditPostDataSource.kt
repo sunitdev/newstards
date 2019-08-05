@@ -5,6 +5,7 @@ import androidx.paging.ItemKeyedDataSource
 import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.reddit.RedditPost
 import com.news.aggregator.newstard.repositories.reddit.RedditRepository
+import com.news.aggregator.newstard.ui.pagination.base.ServiceDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -12,15 +13,23 @@ import javax.inject.Inject
 
 class RedditPostDataSource
         @Inject constructor(private val _redditRepository: RedditRepository):
-        ItemKeyedDataSource<String, RedditPost>() {
+        ServiceDataSource, ItemKeyedDataSource<String, RedditPost>() {
+
+    companion object{
+        const val PAGE_SIZE = 25
+    }
 
     private val initialLoadStateLiveData = MutableLiveData<NetworkState>()
     private val paginationLoadStateLiveData = MutableLiveData<NetworkState>()
 
     private val compositeDisposable = CompositeDisposable()
 
-    companion object{
-        const val PAGE_SIZE = 25
+    override fun getInitialLoadStateLiveData() = initialLoadStateLiveData
+
+    override fun getPaginationLoadStateLiveData() = paginationLoadStateLiveData
+
+    override fun clear() {
+        compositeDisposable.clear()
     }
 
     override fun loadInitial(params: LoadInitialParams<String>, callback: LoadInitialCallback<RedditPost>) {
@@ -66,12 +75,6 @@ class RedditPostDataSource
 
     override fun getKey(item: RedditPost) = item.id
 
-    fun getInitialLoadStateLiveData() = initialLoadStateLiveData
 
-    fun getPaginationLoadStateLiveData() = paginationLoadStateLiveData
-
-    fun clear() {
-        compositeDisposable.clear()
-    }
 
 }

@@ -5,13 +5,15 @@ import androidx.paging.PageKeyedDataSource
 import com.news.aggregator.newstard.network.NetworkState
 import com.news.aggregator.newstard.repositories.medium.MediumPost
 import com.news.aggregator.newstard.repositories.medium.MediumRepository
+import com.news.aggregator.newstard.ui.pagination.base.ServiceDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MediumPostDataSource
-    @Inject constructor(private val _mediumRepository: MediumRepository): PageKeyedDataSource<String, MediumPost>(){
+    @Inject constructor(private val _mediumRepository: MediumRepository):
+        ServiceDataSource, PageKeyedDataSource<String, MediumPost>(){
 
     companion object{
         const val PAGE_SIZE = 25
@@ -21,11 +23,11 @@ class MediumPostDataSource
     private val paginationLoadStateLiveData = MutableLiveData<NetworkState>()
     private val compositeDisposable = CompositeDisposable()
 
-    fun getPaginationLoadStateLiveData() = paginationLoadStateLiveData
+    override fun getPaginationLoadStateLiveData() = paginationLoadStateLiveData
 
-    fun getInitialLoadStateLiveData() = initialLoadStateLiveData
+    override fun getInitialLoadStateLiveData() = initialLoadStateLiveData
 
-    fun clear() {
+    override fun clear() {
         compositeDisposable.clear()
     }
 
