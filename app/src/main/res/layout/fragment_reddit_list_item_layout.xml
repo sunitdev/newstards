@@ -61,6 +61,8 @@
                             android:layout_marginLeft="2dp"
                             android:textSize="12sp"
                             android:textColor="@color/textSecondaryForeground"
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             app:setTimeAgo="@{post.createdAt}"
                             tools:text="Post Time"/>
 
