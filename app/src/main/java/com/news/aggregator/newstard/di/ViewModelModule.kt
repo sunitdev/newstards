@@ -36,4 +36,9 @@ abstract class ViewModelModule {
     @ViewModelKey(MediumFragmentViewModel::class)
     internal abstract fun bindMediumFragmentViewModel(mediumFragmentViewModel: MediumFragmentViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(HackerNewsViewModel::class)
+    internal abstract fun bindHackerNewsViewModel(hackerNewsViewModel: HackerNewsViewModel): ViewModel
+
 }

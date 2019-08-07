@@ -7,6 +7,9 @@
 
     <color name="mediumColor">#00AB6C</color>
     <color name="mediumWebviewColor">#252525</color>
+
+    <color name="hackerNewsColor">#FF6600</color>
+    <color name="hackerNewsWebviewColor">#FF6600</color>
     <!-- Common Color -->
 
     <color name="activityBackground">#FAFAFA</color>

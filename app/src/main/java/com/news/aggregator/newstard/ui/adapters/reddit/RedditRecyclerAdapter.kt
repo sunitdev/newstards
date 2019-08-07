@@ -14,7 +14,7 @@ import com.news.aggregator.newstard.ui.adapters.reddit.viewholders.RedditLoading
 import com.news.aggregator.newstard.ui.adapters.reddit.viewholders.RedditPostItemViewHolder
 
 
-class RedditRecyclerAdapter(context: Context): ServiceRecyclerAdapter<RedditPost>(context, RedditRecyclerDiff()){
+class RedditRecyclerAdapter(private val context: Context): ServiceRecyclerAdapter<RedditPost>(RedditRecyclerDiff()){
 
     override fun getItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val layoutBinding = FragmentRedditListItemLayoutBinding.inflate(LayoutInflater.from(context), parent, false)

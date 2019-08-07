@@ -1,7 +1,7 @@
 package com.news.aggregator.newstard.repositories.reddit
 
 import com.news.aggregator.newstard.services.apis.reddit.RedditService
-import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 interface RedditRepository{
 
-    fun getPosts(limit: Int, afterId: String?): Observable<List<RedditPost>>
+    fun getPosts(limit: Int, afterId: String?): Single<List<RedditPost>>
 }
 
 

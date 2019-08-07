@@ -1,14 +1,12 @@
 package com.news.aggregator.newstard.ui.adapters.base
 
-import android.content.Context
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.news.aggregator.newstard.network.NetworkState
 
-abstract class ServiceRecyclerAdapter<PostModelClass>
-    (protected val context: Context, diffItemCallback: DiffUtil.ItemCallback<PostModelClass>):
+abstract class ServiceRecyclerAdapter<PostModelClass>(diffItemCallback: DiffUtil.ItemCallback<PostModelClass>):
     PagedListAdapter<PostModelClass, RecyclerView.ViewHolder>(diffItemCallback) {
 
     private enum class ViewType(val value: Int){

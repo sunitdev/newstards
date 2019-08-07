@@ -13,8 +13,8 @@ import com.news.aggregator.newstard.ui.adapters.medium.viewholders.MediumErrorVi
 import com.news.aggregator.newstard.ui.adapters.medium.viewholders.MediumLoadingViewHolder
 import com.news.aggregator.newstard.ui.adapters.medium.viewholders.MediumPostItemViewHolder
 
-class MediumRecyclerAdapter constructor(context: Context):
-    ServiceRecyclerAdapter<MediumPost>(context, MediumRecyclerDiff()){
+class MediumRecyclerAdapter constructor(private val context: Context):
+    ServiceRecyclerAdapter<MediumPost>(MediumRecyclerDiff()){
 
     override fun getItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val layoutBinding = FragmentMediumListItemLayoutBinding.inflate(LayoutInflater.from(context), parent, false)
