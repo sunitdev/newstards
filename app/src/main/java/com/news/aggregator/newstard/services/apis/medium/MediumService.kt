@@ -3,17 +3,18 @@ package com.news.aggregator.newstard.services.apis.medium
 import com.news.aggregator.newstard.repositories.medium.MediumPost
 import com.news.aggregator.newstard.repositories.medium.MediumPostBatch
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.util.*
 import javax.inject.Inject
 
 interface MediumService {
-    fun getPopularPost(limit: Int, after: String?): Observable<MediumPostBatch>
+    fun getPopularPost(limit: Int, after: String?): Single<MediumPostBatch>
 }
 
 class MediumServiceImp
         @Inject constructor(private val mediumApi: MediumApi) : MediumService{
 
-    override fun getPopularPost(limit: Int, after: String?): Observable<MediumPostBatch> {
+    override fun getPopularPost(limit: Int, after: String?): Single<MediumPostBatch> {
         return mediumApi.getPopularPosts(PopularPostsGraphQlQuery(limit, after ?: ""))
             .map(this::convertResponseToModel)
     }

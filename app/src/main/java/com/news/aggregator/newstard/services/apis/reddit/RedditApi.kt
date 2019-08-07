@@ -1,6 +1,6 @@
 package com.news.aggregator.newstard.services.apis.reddit
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,5 +14,5 @@ interface RedditApi{
      */
     @GET("/.json")
     fun getPostList(@Query("limit") limit: Int,
-                    @Query("after") after: String?): Observable<ResponseData>
+                    @Query("after") after: String?): Single<ResponseData>
 }
