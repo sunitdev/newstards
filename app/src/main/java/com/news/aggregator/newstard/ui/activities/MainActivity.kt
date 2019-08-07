@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager
 import com.news.aggregator.newstard.R
 import com.news.aggregator.newstard.databinding.ActivityMainBinding
 import com.news.aggregator.newstard.repositories.services.NewsService
+import com.news.aggregator.newstard.services.preferences.AppPreference
 import com.news.aggregator.newstard.ui.activities.base.BaseActivity
 import com.news.aggregator.newstard.ui.adapters.MainActivityFragmentAdapter
 import com.news.aggregator.newstard.ui.viewmodels.MainActivityViewModel
@@ -56,9 +57,12 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
 
     private fun setUpIconBar(){
         // Set selected icon for iconbar
-        layoutBinding.mainActivityIconBar.selectedNewsService = viewModel.getServices()[0]
+        val services = viewModel.getServices()
+        // Assuming services are arranged ascending according to the ids.
+        layoutBinding.mainActivityIconBar.selectedNewsService = services[AppPreference.lastActiveServiceID - 1]
+        layoutBinding.mainActivityViewPage.currentItem = AppPreference.lastActiveServiceID - 1
 
-        layoutBinding.mainActivityIconBar.setOnServiceIconClickListener{handelOnServiceIconClicked(it)}
+        layoutBinding.mainActivityIconBar.setOnServiceIconClickListener{ handelOnServiceIconClicked(it) }
 
     }
 
@@ -71,7 +75,11 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
     }
 
     private fun handelOnServiceIconClicked(service: NewsService){
+        // Update viewpager
         layoutBinding.mainActivityViewPage.currentItem = service.id - 1
+
+        // Save in preference
+        AppPreference.lastActiveServiceID = service.id
     }
 
 }

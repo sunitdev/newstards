@@ -19,6 +19,8 @@
     <string name="preference_app_summary_on_is_dark_theme">Disable dark theme for the app</string>
     <string name="preference_app_summary_off_is_dark_theme">Enable dark theme for the app</string>
 
+    <string name="preference_app_key_last_active_service_id" translatable="false">last_active_service_id</string>
+
     <string name="preference_app_summary_about">A simple new aggregator.</string>
 
     <string name="preference_app_title_app_version">Application Version</string>
