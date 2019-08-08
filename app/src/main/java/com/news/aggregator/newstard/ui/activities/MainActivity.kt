@@ -50,7 +50,9 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>() 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
-                layoutBinding.mainActivityIconBar.selectedNewsService = viewModel.getServices()[position]
+                val service = viewModel.getServices()[position]
+                layoutBinding.mainActivityIconBar.selectedNewsService = service
+                AppPreference.lastActiveServiceID = service.id
             }
         })
     }
