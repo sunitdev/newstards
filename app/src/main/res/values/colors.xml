@@ -10,6 +10,9 @@
 
     <color name="hackerNewsColor">#FF6600</color>
     <color name="hackerNewsWebviewColor">#FF6600</color>
+
+    <color name="devToColor">#1D52CF</color>
+    <color name="devToWebViewColor">#252525</color>
     <!-- Common Color -->
 
     <color name="activityBackground">#FAFAFA</color>

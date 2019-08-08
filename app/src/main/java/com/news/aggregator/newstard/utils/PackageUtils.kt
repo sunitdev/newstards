@@ -15,25 +15,6 @@ class PackageUtils {
 
         fun isChromeInstalled(context: Context) = isPackageInstalled(context, _chromePackageName)
 
-        fun isPackageInstalled(context: Context, packageName: String):Boolean{
-            try {
-                context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-                return true
-            } catch (e: PackageManager.NameNotFoundException) {
-                return false
-            }
-        }
-
-        fun getDefaultViewIntent(url:String): Intent{
-            val intent = Intent(Intent.ACTION_VIEW)
-
-            with(intent) {
-                data = Uri.parse(url)
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
-            return intent
-        }
-
         fun getChromeTabIntent(context: Context, titleColorResource: Int): CustomTabsIntent {
             val builder = CustomTabsIntent.Builder()
                 .setToolbarColor(ContextCompat.getColor(context, titleColorResource))
@@ -62,6 +43,15 @@ class PackageUtils {
             }
 
             return intent
+        }
+
+        private fun isPackageInstalled(context: Context, packageName: String):Boolean{
+            try {
+                context.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+                return true
+            } catch (e: PackageManager.NameNotFoundException) {
+                return false
+            }
         }
 
     }
