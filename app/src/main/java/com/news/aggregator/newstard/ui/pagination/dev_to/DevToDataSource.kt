@@ -34,7 +34,7 @@ class DevToDataSource
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, DevToPost>) {
         initialLoadStateLiveData.postValue(NetworkState.LOADING)
 
-        val postListDisposable = _devToRepository.getTopArticles(1)
+        val postListDisposable = _devToRepository.getTopArticles(0)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
