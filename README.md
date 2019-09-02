@@ -1,12 +1,3 @@
-# Module Folder Structure
-- repository
-- ui
-    - viewmodel
-    - activites
-    - fragments
-- services
-    - Api
-- database
-    - models
-    - data access object
-    - database.java
+# Newstard
+
+A simple news aggregator.

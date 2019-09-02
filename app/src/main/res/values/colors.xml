@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+
+    <!-- Common Colors -->
+    <color name="redditColor">#FF4500</color>
+    <color name="redditWebviewColor">#0079D3</color>
+
+    <color name="mediumColor">#00AB6C</color>
+    <color name="mediumWebviewColor">#252525</color>
+
+    <color name="hackerNewsColor">#FF6600</color>
+    <color name="hackerNewsWebviewColor">#FF6600</color>
+
+    <color name="devToColor">#1D52CF</color>
+    <color name="devToWebViewColor">#252525</color>
+    <!-- Common Color -->
+
+    <color name="activityBackground">#FAFAFA</color>
+
+    <color name="textForeground">#000000</color>
+    <color name="textSecondaryForeground">#000000</color>
+
+    <color name="listLoading">#E6E6E6</color>
+
+    <color name="iconBarBackground">#FFFFFF</color>
+    <color name="iconBarIconBackground">#FFFFFF</color>
+    <color name="iconBarIconShadow">#C8C8C8</color>
+    <color name="iconBarStroke">#C8C8C8</color>
+
 </resources>

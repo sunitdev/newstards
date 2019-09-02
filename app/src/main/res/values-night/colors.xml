@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="activityBackground">#000000</color>
+
+    <color name="textForeground">#FFFFFF</color>
+    <color name="textSecondaryForeground">#FAFAFA</color>
+
+    <color name="listLoading">#E6E6E6</color>
+
+    <color name="iconBarBackground">#FFFFFF</color>
+    <color name="iconBarIconBackground">#FFFFFF</color>
+    <color name="iconBarIconShadow">#E6E6E6</color>
+    <color name="iconBarStroke">#C8C8C8</color>
+
+</resources>
