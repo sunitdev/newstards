@@ -33,7 +33,7 @@
 ## About The Project
 
 <p align="center">
-    <img src=" https://trello-attachments.s3.amazonaws.com/5d0c4e45e37e026262af94d4/5d6d27edcc09755b82d04d6a/94141886de5368d122ddf53e646f0c0d/animation.gif" alt="Animation">
+    <img src="https://trello-attachments.s3.amazonaws.com/5d0c4e45e37e026262af94d4/5d6d27edcc09755b82d04d6a/94141886de5368d122ddf53e646f0c0d/animation.gif" alt="Animation">
 </p>
 
 
