@@ -41,7 +41,7 @@ Newstards is a simple new aggregator application. The aim of this project is to 
 
 ### Built With
 
-Following Frameworks, Libraries and tools are used in building this website.
+Following Frameworks, Libraries and tools are used in building this app.
 
 * [Android Jetpack](https://developer.android.com/jetpack/)
 * [Dagger2](https://github.com/google/dagger)
