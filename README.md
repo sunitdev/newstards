@@ -37,11 +37,11 @@
 </p>
 
 
-Newstards is a simple new aggregator application. The aim of this project is to create a one-stop Android application for reading all tech related latest article on the go. Feature of this Dark theme, infinite scrolling and custom icon bar view.
+Newstards is a simple new aggregator application. The aim of this project is to create a one-stop Android application for reading all tech related latest article on the go. Feature include **Dark theme** (Pun intended :), infinite scrolling and custom icon bar view.
 
 ### Built With
 
-Following Frameworks, Libraries and tools are used in building this website.
+Following Frameworks, Libraries and tools are used in building this app.
 
 * [Android Jetpack](https://developer.android.com/jetpack/)
 * [Dagger2](https://github.com/google/dagger)
