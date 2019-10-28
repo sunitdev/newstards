@@ -14,7 +14,7 @@ class DevToServiceImp
     @Inject constructor(private val _devToApi: DevToApi): DevToService {
 
     companion object{
-        private const val PUBLISHED_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        private const val PUBLISHED_DATETIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ssX"
     }
 
     override fun getTopArticles(page: Int): Observable<List<DevToPost>> {

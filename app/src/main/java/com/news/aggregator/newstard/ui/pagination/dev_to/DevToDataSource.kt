@@ -40,7 +40,7 @@ class DevToDataSource
             .subscribe({
                 initialLoadStateLiveData.postValue(NetworkState.SUCCESS)
 
-                callback.onResult(it, null, 2)
+                callback.onResult(it, null, 1)
             }, {
                 initialLoadStateLiveData.postValue(NetworkState.ERROR)
             })
