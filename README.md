@@ -7,7 +7,7 @@
 
 <br />
 <p align="center">
-    <a href="https://github.com/sunitdeshpande/notes">
+    <a href="https://github.com/sunitdev/newstards">
     <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
   </a>
   <h3 align="center">Newstards.</h3>
