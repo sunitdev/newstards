@@ -1,10 +1,3 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 <br />
 <p align="center">
     <a href="https://github.com/sunitdev/newstards">
@@ -54,20 +47,8 @@ Following Frameworks, Libraries and tools are used in building this app.
 <!-- CONTACT -->
 ## Contact
 
-Sunit Deshpande  - sunitdeshpande1234@gmail.com
-
-Project Link: [https://github.com/sunitdeshpande/newstards](https://github.com/sunitdeshpande/newstards)
+Project Link: [https://github.com/sunitdev/newstards](https://github.com/sunitdev/newstards)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/sunitdeshpande/newstards.svg?style=flat-square
-[contributors-url]: https://github.com/sunitdeshpande/newstards/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/sunitdeshpande/newstards.svg?style=flat-square
-[forks-url]: https://github.com/sunitdeshpande/newstards/network/members
-[stars-shield]: https://img.shields.io/github/stars/sunitdeshpande/newstards.svg?style=flat-square
-[stars-url]: https://github.com/sunitdeshpande/newstards/stargazers
-[issues-shield]: https://img.shields.io/github/issues/sunitdeshpande/newstards.svg?style=flat-square
-[issues-url]: https://github.com/sunitdeshpande/newstards/issues
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/sunitdeshpande/
 [product-screenshot]: https://trello-attachments.s3.amazonaws.com/5d0c4e45e37e026262af94d4/5d6d27edcc09755b82d04d6a/94141886de5368d122ddf53e646f0c0d/animation.gif
